@@ -1,0 +1,11 @@
+{
+	"appId": "com.chronovault.horology",
+	"appName": "ChronoVault",
+	"webDir": "dist",
+	"server": {
+		"androidScheme": "https"
+	},
+	"android": {
+		"minSdkVersion": 30
+	}
+}

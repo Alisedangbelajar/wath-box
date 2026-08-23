@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
+}
+
+.font-serif-luxury {
+  font-family: 'Cinzel', serif;
+}
+
+.font-editorial {
+  font-family: 'Playfair Display', serif;
+}
+
+.font-mono-tech {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Custom velvet watch box texture */
+.velvet-cushion {
+  background: radial-gradient(circle at 50% 30%, #1e1b18 0%, #12100e 70%, #0a0908 100%);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8), inset 0 -2px 6px rgba(255, 255, 255, 0.05), 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.velvet-cushion-green {
+  background: radial-gradient(circle at 50% 30%, #0d2818 0%, #06180e 70%, #030d07 100%);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8), inset 0 -2px 6px rgba(255, 255, 255, 0.05), 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.velvet-cushion-navy {
+  background: radial-gradient(circle at 50% 30%, #0f1c2e 0%, #08101a 70%, #04080e 100%);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8), inset 0 -2px 6px rgba(255, 255, 255, 0.05), 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(20, 20, 20, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(217, 119, 6, 0.25);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(217, 119, 6, 0.45);
+}

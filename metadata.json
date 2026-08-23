@@ -1,0 +1,6 @@
+{
+  "name": "ChronoVault",
+  "description": "A luxury horology vault, accuracy rate lab, WOTD rotation tracker, and strap studio built for watch collectors and enthusiasts.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
