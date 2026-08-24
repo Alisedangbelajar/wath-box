@@ -183,33 +183,33 @@ export const PhotoRecognitionModal: React.FC<PhotoRecognitionModalProps> = ({
       subtitle=""
       icon={<Camera className="w-4 h-4" />}
     >
-      <div className="space-y-3.5 text-xs font-sans">
+      <div className="space-y-3.5 text-xs font-sans text-slate-800">
         {/* STEP 1: CAPTURE OR PICK PHOTO (NO PRESETS/SAMPLES) */}
         {!capturedImage && !isCameraActive && (
           <div className="space-y-3">
-            <div className="border border-neutral-800 rounded-3xl p-6 flex flex-col items-center justify-center text-center bg-neutral-900/70">
-              <div className="w-14 h-14 rounded-2xl bg-neutral-800 border border-neutral-700 flex items-center justify-center text-amber-400 mb-3 shadow-inner">
+            <div className="border border-slate-200/90 rounded-3xl p-6 flex flex-col items-center justify-center text-center bg-slate-50 shadow-2xs">
+              <div className="w-14 h-14 rounded-2xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 mb-3 shadow-2xs">
                 <Camera className="w-7 h-7 stroke-[2]" />
               </div>
 
-              <h4 className="font-serif-luxury text-sm font-bold text-neutral-100">
+              <h4 className="font-serif-luxury text-sm font-bold text-slate-800">
                 Wrist Shot
               </h4>
-              <p className="text-[11px] text-neutral-400 font-mono-tech mt-0.5 max-w-xs">
+              <p className="text-[11px] text-slate-500 font-mono-tech mt-0.5 max-w-xs">
                 Take a photo or choose from your phone gallery
               </p>
 
               <div className="grid grid-cols-2 gap-2.5 w-full mt-5">
                 <button
                   onClick={startLiveCamera}
-                  className="py-3 px-3 rounded-2xl bg-amber-500 hover:bg-amber-400 text-neutral-950 font-bold font-mono-tech flex items-center justify-center gap-2 shadow-md transition-colors text-xs"
+                  className="py-3 px-3 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold font-mono-tech flex items-center justify-center gap-2 shadow-md transition-colors text-xs"
                 >
                   <Camera className="w-4 h-4" />
                   <span>Open Camera</span>
                 </button>
 
-                <label className="py-3 px-3 rounded-2xl bg-neutral-800 hover:bg-neutral-700 text-neutral-200 border border-neutral-700 cursor-pointer font-mono-tech flex items-center justify-center gap-2 transition-colors text-xs">
-                  <ImageIcon className="w-4 h-4 text-amber-400" />
+                <label className="py-3 px-3 rounded-2xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 cursor-pointer font-mono-tech flex items-center justify-center gap-2 transition-colors text-xs font-semibold shadow-2xs">
+                  <ImageIcon className="w-4 h-4 text-indigo-600" />
                   <span>Phone Gallery</span>
                   <input
                     type="file"
@@ -225,13 +225,13 @@ export const PhotoRecognitionModal: React.FC<PhotoRecognitionModalProps> = ({
 
         {/* CAMERA ACTIVE VIEW */}
         {isCameraActive && (
-          <div className="relative rounded-3xl overflow-hidden bg-black border border-neutral-800 flex flex-col items-center justify-center h-72">
+          <div className="relative rounded-3xl overflow-hidden bg-black border border-slate-200 flex flex-col items-center justify-center h-72 shadow-lg">
             <video ref={videoRef} className="w-full h-full object-cover" playsInline muted autoPlay />
             <canvas ref={canvasRef} className="hidden" />
 
-            <div className="absolute inset-0 border-2 border-amber-400/40 rounded-3xl pointer-events-none m-4 flex items-center justify-center">
-              <div className="w-36 h-36 rounded-full border border-dashed border-amber-400/60 flex items-center justify-center">
-                <span className="text-[9px] text-amber-300 font-mono-tech bg-black/60 px-2 py-0.5 rounded-full">
+            <div className="absolute inset-0 border-2 border-indigo-400/40 rounded-3xl pointer-events-none m-4 flex items-center justify-center">
+              <div className="w-36 h-36 rounded-full border border-dashed border-indigo-400/60 flex items-center justify-center">
+                <span className="text-[9px] text-white font-mono-tech bg-indigo-600/80 px-2.5 py-0.5 rounded-full font-bold">
                   Align Watch
                 </span>
               </div>
@@ -240,14 +240,14 @@ export const PhotoRecognitionModal: React.FC<PhotoRecognitionModalProps> = ({
             <div className="absolute bottom-3 flex items-center gap-3">
               <button
                 onClick={captureCameraFrame}
-                className="px-5 py-2.5 rounded-full bg-amber-400 hover:bg-amber-300 text-neutral-950 font-bold font-mono-tech flex items-center gap-1.5 shadow-lg text-xs"
+                className="px-5 py-2.5 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold font-mono-tech flex items-center gap-1.5 shadow-lg text-xs"
               >
                 <Camera className="w-4 h-4" />
                 <span>Capture</span>
               </button>
               <button
                 onClick={stopCameraStream}
-                className="px-3.5 py-2.5 rounded-full bg-neutral-900/90 text-neutral-300 font-mono-tech border border-neutral-700 text-xs"
+                className="px-3.5 py-2.5 rounded-full bg-white/90 text-slate-800 font-mono-tech border border-slate-200 text-xs font-semibold"
               >
                 Cancel
               </button>
@@ -257,9 +257,9 @@ export const PhotoRecognitionModal: React.FC<PhotoRecognitionModalProps> = ({
 
         {/* STEP 2: SCANNING STATE */}
         {isAnalyzing && (
-          <div className="bg-neutral-900/90 border border-neutral-800 rounded-3xl p-6 flex flex-col items-center justify-center text-center space-y-3">
-            <div className="w-9 h-9 rounded-full border-2 border-amber-400 border-t-transparent animate-spin" />
-            <h4 className="font-serif-luxury text-sm font-bold text-neutral-200">
+          <div className="bg-slate-50 border border-slate-200/90 rounded-3xl p-6 flex flex-col items-center justify-center text-center space-y-3 shadow-2xs">
+            <div className="w-9 h-9 rounded-full border-2 border-indigo-600 border-t-transparent animate-spin" />
+            <h4 className="font-serif-luxury text-sm font-bold text-slate-800">
               Scanning timepiece...
             </h4>
           </div>
@@ -269,7 +269,7 @@ export const PhotoRecognitionModal: React.FC<PhotoRecognitionModalProps> = ({
         {capturedImage && !isAnalyzing && recognitionResult && (
           <div className="space-y-3">
             {/* Captured Photo Preview */}
-            <div className="relative rounded-3xl overflow-hidden bg-neutral-900 border border-neutral-800 h-44 flex items-center justify-center">
+            <div className="relative rounded-3xl overflow-hidden bg-slate-100 border border-slate-200 h-44 flex items-center justify-center shadow-2xs">
               <img
                 src={capturedImage}
                 alt="Wrist shot"
@@ -282,7 +282,7 @@ export const PhotoRecognitionModal: React.FC<PhotoRecognitionModalProps> = ({
                   setCapturedImage(null);
                   setRecognitionResult(null);
                 }}
-                className="absolute top-3 right-3 bg-neutral-900/80 hover:bg-neutral-900 text-neutral-300 p-2 rounded-full border border-neutral-700 text-xs flex items-center gap-1 font-mono-tech shadow-md"
+                className="absolute top-3 right-3 bg-white/90 hover:bg-white text-slate-700 p-2 rounded-full border border-slate-200 text-xs flex items-center gap-1 font-mono-tech shadow-md"
                 title="Retake / Change Photo"
               >
                 <RefreshCw className="w-3.5 h-3.5" />
@@ -290,12 +290,12 @@ export const PhotoRecognitionModal: React.FC<PhotoRecognitionModalProps> = ({
             </div>
 
             {/* Matched Details Form */}
-            <div className="bg-neutral-900/90 border border-neutral-800 rounded-3xl p-4 space-y-3">
-              <div className="flex items-center justify-between border-b border-neutral-800 pb-2">
-                <span className="font-serif-luxury font-bold text-neutral-100 text-xs">
+            <div className="bg-slate-50 border border-slate-200/90 rounded-3xl p-4 space-y-3 shadow-2xs">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+                <span className="font-serif-luxury font-bold text-slate-800 text-xs">
                   Matched Timepiece & Strap
                 </span>
-                <span className="text-[10px] text-emerald-400 font-mono-tech flex items-center gap-1">
+                <span className="text-[10px] text-emerald-600 font-mono-tech font-bold flex items-center gap-1">
                   <Check className="w-3 h-3" /> In Collection
                 </span>
               </div>
@@ -303,11 +303,11 @@ export const PhotoRecognitionModal: React.FC<PhotoRecognitionModalProps> = ({
               {/* Form to adjust or confirm */}
               <div className="grid grid-cols-2 gap-2 font-mono-tech text-xs">
                 <div>
-                  <label className="text-[10px] text-neutral-400 block mb-1">Timepiece</label>
+                  <label className="text-[10px] text-slate-500 font-bold block mb-1">Timepiece</label>
                   <select
                     value={selectedWatchId}
                     onChange={(e) => setSelectedWatchId(e.target.value)}
-                    className="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-2 text-neutral-200 text-xs focus:outline-none focus:border-amber-500"
+                    className="w-full bg-white border border-slate-200 rounded-xl p-2 text-slate-800 text-xs focus:outline-indigo-500 shadow-2xs"
                   >
                     {watches.map((w) => (
                       <option key={w.id} value={w.id}>
@@ -318,11 +318,11 @@ export const PhotoRecognitionModal: React.FC<PhotoRecognitionModalProps> = ({
                 </div>
 
                 <div>
-                  <label className="text-[10px] text-neutral-400 block mb-1">Mounted Strap</label>
+                  <label className="text-[10px] text-slate-500 font-bold block mb-1">Mounted Strap</label>
                   <select
                     value={selectedStrapId}
                     onChange={(e) => setSelectedStrapId(e.target.value)}
-                    className="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-2 text-neutral-200 text-xs focus:outline-none focus:border-amber-500"
+                    className="w-full bg-white border border-slate-200 rounded-xl p-2 text-slate-800 text-xs focus:outline-indigo-500 shadow-2xs"
                   >
                     {straps.map((s) => (
                       <option key={s.id} value={s.id}>
@@ -334,14 +334,14 @@ export const PhotoRecognitionModal: React.FC<PhotoRecognitionModalProps> = ({
               </div>
 
               <div>
-                <label className="text-[10px] font-mono-tech text-neutral-400 block mb-1">
+                <label className="text-[10px] font-mono-tech text-slate-500 font-bold block mb-1">
                   Collector Note
                 </label>
                 <input
                   type="text"
                   value={collectorNote}
                   onChange={(e) => setCollectorNote(e.target.value)}
-                  className="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-2 text-xs text-neutral-200 focus:outline-none focus:border-amber-500"
+                  className="w-full bg-white border border-slate-200 rounded-xl p-2 text-xs text-slate-800 focus:outline-indigo-500 shadow-2xs"
                 />
               </div>
 
@@ -349,7 +349,7 @@ export const PhotoRecognitionModal: React.FC<PhotoRecognitionModalProps> = ({
               <div className="flex items-center gap-2 pt-1">
                 <button
                   onClick={handleConfirmLogWear}
-                  className="flex-1 py-2.5 rounded-2xl bg-amber-500 hover:bg-amber-400 text-neutral-950 font-bold font-mono-tech text-xs tracking-wide transition-all shadow-md flex items-center justify-center gap-1.5"
+                  className="flex-1 py-2.5 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold font-mono-tech text-xs tracking-wide transition-all shadow-md flex items-center justify-center gap-1.5"
                 >
                   <Check className="w-3.5 h-3.5 stroke-[3]" />
                   <span>Log Wrist Check & Set WOTD</span>
@@ -357,7 +357,7 @@ export const PhotoRecognitionModal: React.FC<PhotoRecognitionModalProps> = ({
 
                 <button
                   onClick={handleAddNewFromPhoto}
-                  className="px-3 py-2.5 rounded-2xl bg-neutral-800 hover:bg-neutral-700 text-amber-300 font-mono-tech text-xs border border-neutral-700 whitespace-nowrap"
+                  className="px-3 py-2.5 rounded-2xl bg-white hover:bg-slate-100 text-indigo-600 font-mono-tech text-xs font-semibold border border-slate-200 whitespace-nowrap shadow-2xs"
                   title="Add as a brand new watch to collection"
                 >
                   + Add New Watch

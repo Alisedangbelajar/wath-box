@@ -9,7 +9,10 @@ import {
   Volume2, 
   VolumeX,
   AlertTriangle,
-  FileText
+  FileText,
+  Bell,
+  Sparkles,
+  Camera
 } from 'lucide-react';
 import { ActiveTab } from '../types';
 import { watchAudioEngine } from '../utils/audioTick';
@@ -21,6 +24,7 @@ interface MobileFrameProps {
   onOpenInsurance: () => void;
   neglectedCount?: number;
   onJumpToNeglected?: () => void;
+  onOpenPhotoModal?: () => void;
   children: React.ReactNode;
 }
 
@@ -30,10 +34,11 @@ export const MobileFrame: React.FC<MobileFrameProps> = ({
   onOpenInsurance,
   neglectedCount = 0,
   onJumpToNeglected,
+  onOpenPhotoModal,
   children,
 }) => {
   const [isFramed, setIsFramed] = useState<boolean>(true);
-  const [currentTimeStr, setCurrentTimeStr] = useState<string>('10:10:30');
+  const [currentTimeStr, setCurrentTimeStr] = useState<string>('09:41');
   const [isAudioMuted, setIsAudioMuted] = useState<boolean>(true);
 
   useEffect(() => {
@@ -41,8 +46,7 @@ export const MobileFrame: React.FC<MobileFrameProps> = ({
       const d = new Date();
       const h = String(d.getHours()).padStart(2, '0');
       const m = String(d.getMinutes()).padStart(2, '0');
-      const s = String(d.getSeconds()).padStart(2, '0');
-      setCurrentTimeStr(`${h}:${m}:${s}`);
+      setCurrentTimeStr(`${h}:${m}`);
     };
     updateTime();
     const interval = setInterval(updateTime, 1000);
@@ -76,17 +80,17 @@ export const MobileFrame: React.FC<MobileFrameProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-neutral-100 flex flex-col items-center justify-start sm:py-6 sm:px-4 selection:bg-amber-500/30 selection:text-amber-200">
-      {/* Top Desktop Utility Bar */}
-      <header className="w-full max-w-4xl flex items-center justify-between px-4 py-3 mb-2 border-b border-neutral-800/80 bg-neutral-900/60 backdrop-blur rounded-2xl text-xs shadow-lg">
+    <div className="min-h-screen bg-slate-100/90 text-slate-800 flex flex-col items-center justify-start sm:py-6 sm:px-4 selection:bg-indigo-500/20 selection:text-indigo-900">
+      {/* Top Desktop Utility Header */}
+      <header className="w-full max-w-4xl flex items-center justify-between px-4 py-3 mb-2 border border-slate-200/80 bg-white/80 backdrop-blur rounded-2xl text-xs shadow-xs">
         <div className="flex items-center gap-3">
-          <div className="w-7 h-7 rounded-xl bg-gradient-to-tr from-amber-600 to-amber-400 flex items-center justify-center shadow-lg shadow-amber-500/20">
-            <Watch className="w-4 h-4 text-neutral-950 stroke-[2.5]" />
+          <div className="w-8 h-8 rounded-2xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-amber-500 flex items-center justify-center shadow-xs text-white">
+            <Watch className="w-4 h-4 stroke-[2.5]" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-serif-luxury text-sm font-bold tracking-widest text-amber-200">CHRONOVAULT</span>
-              <span className="text-[10px] text-amber-400/80 font-mono-tech px-1.5 py-0.2 rounded bg-amber-950/60 border border-amber-800/40">
+              <span className="font-semibold text-sm tracking-tight text-slate-900">Watch Box</span>
+              <span className="text-[10px] text-indigo-700 font-semibold font-mono-tech px-2 py-0.5 rounded-full bg-indigo-50 border border-indigo-200/60">
                 HOROLOGY OS
               </span>
             </div>
@@ -97,29 +101,29 @@ export const MobileFrame: React.FC<MobileFrameProps> = ({
           {/* Neglected Alert Badge in Top Bar */}
           <button
             onClick={handleNeglectedClick}
-            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border text-xs font-mono-tech transition-all ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-mono-tech transition-all shadow-2xs ${
               neglectedCount > 0
-                ? 'bg-amber-950/70 border-amber-500/60 text-amber-300 hover:bg-amber-900/80'
-                : 'bg-neutral-800/60 border-neutral-700/60 text-neutral-400 hover:text-neutral-200'
+                ? 'bg-amber-50 border-amber-300 text-amber-900 hover:bg-amber-100/80 font-semibold'
+                : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'
             }`}
             title="View Idle Watches (>14 Days Without Wear)"
           >
-            <AlertTriangle className={`w-3.5 h-3.5 ${neglectedCount > 0 ? 'text-amber-400' : 'text-neutral-500'}`} />
+            <AlertTriangle className={`w-3.5 h-3.5 ${neglectedCount > 0 ? 'text-amber-600' : 'text-slate-400'}`} />
             <span>{neglectedCount > 0 ? `${neglectedCount} Idle` : 'Rotation OK'}</span>
           </button>
 
           {/* Audio Escapement Simulator Button */}
           <button
             onClick={toggleSound}
-            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border transition-all ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border transition-all shadow-2xs ${
               !isAudioMuted 
-                ? 'bg-amber-500/20 border-amber-500/60 text-amber-300 ring-1 ring-amber-400/40' 
-                : 'bg-neutral-800/60 border-neutral-700/60 text-neutral-400 hover:text-neutral-200'
+                ? 'bg-indigo-50 border-indigo-300 text-indigo-700 font-semibold ring-1 ring-indigo-200' 
+                : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'
             }`}
             title="Acoustic 28,800 vph Escapement Synthesizer"
           >
             {!isAudioMuted ? <Volume2 className="w-3.5 h-3.5" /> : <VolumeX className="w-3.5 h-3.5" />}
-            <span className="font-mono-tech text-[10px] hidden md:inline">
+            <span className="font-mono-tech text-[11px] hidden md:inline">
               {!isAudioMuted ? '4Hz Audio ON' : 'Escapement'}
             </span>
           </button>
@@ -127,17 +131,17 @@ export const MobileFrame: React.FC<MobileFrameProps> = ({
           {/* Insurance Appraisal Document */}
           <button
             onClick={onOpenInsurance}
-            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-neutral-800/60 hover:bg-neutral-800 border border-neutral-700/60 text-neutral-300 hover:text-amber-200 transition-colors text-xs font-mono-tech"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 transition-colors text-xs font-mono-tech shadow-2xs"
             title="Appraisal Certificate"
           >
-            <FileText className="w-3.5 h-3.5 text-amber-400" />
+            <FileText className="w-3.5 h-3.5 text-indigo-600" />
             <span className="hidden sm:inline">Appraisal</span>
           </button>
 
           {/* Device Frame View Toggle */}
           <button
             onClick={() => setIsFramed(!isFramed)}
-            className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-neutral-800/60 hover:bg-neutral-800 border border-neutral-700/60 text-neutral-300 transition-colors text-xs"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 transition-colors text-xs shadow-2xs"
             title={isFramed ? "Switch to Full Screen View" : "Switch to Mobile Device Frame"}
           >
             {isFramed ? <Maximize2 className="w-3.5 h-3.5" /> : <Smartphone className="w-3.5 h-3.5" />}
@@ -146,80 +150,95 @@ export const MobileFrame: React.FC<MobileFrameProps> = ({
         </div>
       </header>
 
-      {/* Main Container: Mobile Frame vs Full Screen */}
+      {/* Main Container: Modern Mobile Device Frame vs Full Screen */}
       <div 
         className={`w-full transition-all duration-300 ${
           isFramed 
-            ? 'max-w-[430px] h-[890px] max-h-[92vh] border-[8px] border-neutral-800/90 rounded-[48px] shadow-2xl shadow-black/90 relative flex flex-col overflow-hidden bg-neutral-950 ring-1 ring-neutral-700/50'
-            : 'max-w-4xl min-h-[85vh] rounded-3xl border border-neutral-800 bg-neutral-950 flex flex-col shadow-2xl overflow-hidden'
+            ? 'max-w-[420px] h-[890px] max-h-[92vh] border-[9px] border-slate-800 rounded-[50px] shadow-2xl relative flex flex-col overflow-hidden bg-[#f8f9fc] ring-1 ring-slate-400/20'
+            : 'max-w-4xl min-h-[85vh] rounded-3xl border border-slate-200 bg-[#f8f9fc] flex flex-col shadow-xl overflow-hidden'
         }`}
       >
         {/* Mobile Device Top Notch & Status Bar (When in framed mode) */}
         {isFramed && (
-          <div className="w-full bg-neutral-950 px-7 pt-3 pb-2 flex items-center justify-between text-[11px] font-mono-tech text-neutral-400 select-none z-30 shrink-0 border-b border-neutral-900/60">
-            <span>{currentTimeStr.slice(0, 5)}</span>
+          <div className="w-full bg-[#f8f9fc]/90 backdrop-blur-md px-7 pt-3 pb-2 flex items-center justify-between text-[11px] font-semibold text-slate-800 select-none z-30 shrink-0">
+            <span className="font-mono-tech tracking-tight">{currentTimeStr}</span>
 
-            {/* Subtle Phone Speaker & Notch */}
-            <div className="w-20 h-3.5 bg-neutral-900 rounded-full flex items-center justify-center border border-neutral-800/80">
-              <div className="w-8 h-1 rounded-full bg-neutral-800" />
+            {/* Dynamic Island / Notch */}
+            <div className="w-24 h-4 bg-slate-900 rounded-full flex items-center justify-between px-2.5 shadow-2xs">
+              <div className="w-2 h-2 rounded-full bg-slate-800" />
+              <div className="w-1.5 h-1.5 rounded-full bg-indigo-500/60" />
             </div>
 
-            <div className="flex items-center gap-1.5 text-[10px]">
-              <span>5G</span>
-              <div className="w-4 h-2.5 border border-neutral-500 rounded-xs p-0.5 flex items-center">
-                <div className="w-full h-full bg-emerald-500 rounded-2xs" />
+            <div className="flex items-center gap-1.5 text-[10px] text-slate-700">
+              <span className="font-mono-tech font-bold">5G</span>
+              <div className="w-4 h-2.5 border border-slate-700 rounded-xs p-0.5 flex items-center">
+                <div className="w-full h-full bg-slate-900 rounded-2xs" />
               </div>
             </div>
           </div>
         )}
 
-        {/* Scrollable View Content (Clean, un-obscured with proper bottom padding) */}
-        <main className="flex-1 overflow-y-auto overflow-x-hidden relative flex flex-col pb-20">
+        {/* Scrollable View Content (Clean, soft light mode) */}
+        <main className="flex-1 overflow-y-auto overflow-x-hidden relative flex flex-col pb-24">
           {children}
         </main>
 
-        {/* Ergonomic 3-Tab Focused Mobile Bottom Nav Bar */}
-        <nav className="absolute bottom-0 inset-x-0 bg-neutral-950/95 backdrop-blur-xl border-t border-neutral-800/80 px-4 py-2 flex items-center justify-around z-40">
-          {/* 1. Collection (Watches & Straps) */}
-          <button
-            onClick={() => setActiveTab('box')}
-            className={`flex flex-col items-center justify-center py-1.5 px-4 rounded-2xl transition-all ${
-              activeTab === 'box' || activeTab === 'sotc'
-                ? 'text-amber-400 font-semibold bg-amber-500/10 border border-amber-500/30'
-                : 'text-neutral-400 hover:text-neutral-200'
-            }`}
-          >
-            <Layers className="w-5 h-5 mb-0.5" />
-            <span className="text-[10px] font-mono-tech tracking-tight">Collection</span>
-          </button>
+        {/* Modern Floating Bottom Nav Bar */}
+        <div className="absolute bottom-3 inset-x-0 px-4 z-40 pointer-events-none">
+          <nav className="pointer-events-auto bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-full py-1.5 px-3 flex items-center justify-around shadow-lg shadow-slate-300/40">
+            {/* 1. Collection (Watches & Straps) */}
+            <button
+              onClick={() => setActiveTab('box')}
+              className={`flex items-center gap-2 py-2 px-3.5 rounded-full transition-all ${
+                activeTab === 'box' || activeTab === 'sotc'
+                  ? 'text-indigo-600 font-semibold bg-indigo-50/90 shadow-2xs'
+                  : 'text-slate-500 hover:text-slate-900'
+              }`}
+            >
+              <Layers className="w-4 h-4" />
+              <span className="text-xs font-semibold">Box</span>
+            </button>
 
-          {/* 2. Watch Rotation */}
-          <button
-            onClick={() => setActiveTab('wotd')}
-            className={`flex flex-col items-center justify-center py-1.5 px-4 rounded-2xl transition-all ${
-              activeTab === 'wotd'
-                ? 'text-amber-400 font-semibold bg-amber-500/10 border border-amber-500/30'
-                : 'text-neutral-400 hover:text-neutral-200'
-            }`}
-          >
-            <PieChart className="w-5 h-5 mb-0.5" />
-            <span className="text-[10px] font-mono-tech tracking-tight">Watch Rotation</span>
-          </button>
+            {/* Quick Wrist Scan Center Floating Trigger */}
+            {onOpenPhotoModal && (
+              <button
+                onClick={onOpenPhotoModal}
+                className="w-10 h-10 -my-2 rounded-full bg-gradient-to-tr from-indigo-600 to-violet-500 text-white flex items-center justify-center shadow-md shadow-indigo-500/30 hover:scale-105 active:scale-95 transition-all"
+                title="Scan Wrist / Take Photo"
+              >
+                <Camera className="w-4 h-4" />
+              </button>
+            )}
 
-          {/* 3. Positional Rate & Sync Lab */}
-          <button
-            onClick={() => setActiveTab('lab')}
-            className={`flex flex-col items-center justify-center py-1.5 px-4 rounded-2xl transition-all ${
-              activeTab === 'lab'
-                ? 'text-amber-400 font-semibold bg-amber-500/10 border border-amber-500/30'
-                : 'text-neutral-400 hover:text-neutral-200'
-            }`}
-          >
-            <Activity className="w-5 h-5 mb-0.5" />
-            <span className="text-[10px] font-mono-tech tracking-tight">Rate Lab</span>
-          </button>
-        </nav>
+            {/* 2. Watch Rotation */}
+            <button
+              onClick={() => setActiveTab('wotd')}
+              className={`flex items-center gap-2 py-2 px-3.5 rounded-full transition-all ${
+                activeTab === 'wotd'
+                  ? 'text-indigo-600 font-semibold bg-indigo-50/90 shadow-2xs'
+                  : 'text-slate-500 hover:text-slate-900'
+              }`}
+            >
+              <PieChart className="w-4 h-4" />
+              <span className="text-xs font-semibold">Rotation</span>
+            </button>
+
+            {/* 3. Positional Rate & Sync Lab */}
+            <button
+              onClick={() => setActiveTab('lab')}
+              className={`flex items-center gap-2 py-2 px-3.5 rounded-full transition-all ${
+                activeTab === 'lab'
+                  ? 'text-indigo-600 font-semibold bg-indigo-50/90 shadow-2xs'
+                  : 'text-slate-500 hover:text-slate-900'
+              }`}
+            >
+              <Activity className="w-4 h-4" />
+              <span className="text-xs font-semibold">Lab</span>
+            </button>
+          </nav>
+        </div>
       </div>
     </div>
   );
 };
+

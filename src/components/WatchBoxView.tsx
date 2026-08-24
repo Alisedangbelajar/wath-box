@@ -15,7 +15,9 @@ import {
   Sparkles,
   ShieldCheck,
   Compass,
-  SlidersHorizontal
+  SlidersHorizontal,
+  FileText,
+  Clock
 } from 'lucide-react';
 import { WatchItem, StrapItem } from '../types';
 import { calculateCollectionMetrics, calculateWatchCostPerWear, getDaysSinceLastWorn } from '../utils/calculations';
@@ -89,7 +91,7 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
       particleCount: 35,
       spread: 60,
       origin: { y: 0.8 },
-      colors: ['#f59e0b', '#fbbf24', '#d97706'],
+      colors: ['#6366f1', '#8b5cf6', '#f59e0b'],
     });
   };
 
@@ -170,75 +172,121 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
   };
 
   return (
-    <div className="p-4 space-y-4 relative">
-      {/* Master Box Header & Summary */}
-      <div className="bg-gradient-to-br from-neutral-900 via-neutral-900/90 to-neutral-950 p-4 rounded-3xl border border-neutral-800/90 shadow-xl">
-        <div className="flex items-center justify-between mb-3">
+    <div className="p-4 space-y-4 relative text-slate-800">
+      {/* 1. Header & Personalized Greeting Inspired by Reference */}
+      <div className="pt-1 px-1">
+        <div className="flex items-center justify-between">
           <div>
-            <div className="flex items-center gap-1.5 text-xs text-amber-400 font-mono-tech tracking-wider uppercase">
-              <Watch className="w-3.5 h-3.5 text-amber-400" />
-              <span>Horology Portfolio</span>
-            </div>
-            <h1 className="font-serif-luxury text-xl text-neutral-100 font-bold tracking-wide mt-0.5">
-              Collection
+            <span className="text-xs font-semibold text-slate-400 font-mono-tech tracking-wide uppercase">
+              Horology OS
+            </span>
+            <h1 className="text-2xl font-bold tracking-tight text-slate-900 mt-0.5">
+              Hello, Collector
             </h1>
+            <p className="text-sm text-slate-500 font-medium">What would you like to explore today?</p>
           </div>
 
-          {/* Action: Single Wrist Scanner Button */}
-          {onOpenPhotoModal && (
-            <button
-              onClick={onOpenPhotoModal}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/40 text-amber-300 transition-colors text-xs font-mono-tech font-semibold shadow-xs"
-              title="Open Wrist Scanner"
-            >
-              <Camera className="w-3.5 h-3.5 text-amber-400" />
-              <span>Wrist Scanner</span>
-            </button>
-          )}
-        </div>
-
-        {/* 3 Metric Cards */}
-        <div className="grid grid-cols-3 gap-2 pt-2 border-t border-neutral-800/60 text-center sm:text-left">
-          <div className="bg-neutral-950/60 p-2.5 rounded-2xl border border-neutral-800/40">
-            <span className="text-[9px] text-neutral-400 block font-mono-tech uppercase">Appraised Vault</span>
-            <span className="text-sm font-bold text-neutral-100 font-mono-tech">
-              ${metrics.totalMarketValue.toLocaleString()}
-            </span>
-            <span className="text-[9px] text-emerald-400 block font-mono-tech mt-0.5">
-              {watches.length} Pieces
-            </span>
-          </div>
-
-          <div className="bg-neutral-950/60 p-2.5 rounded-2xl border border-neutral-800/40">
-            <span className="text-[9px] text-neutral-400 block font-mono-tech uppercase">Strap Wardrobe</span>
-            <span className="text-sm font-bold text-amber-300 font-mono-tech">
-              {straps.length} Straps
-            </span>
-            <span className="text-[9px] text-neutral-400 block font-mono-tech mt-0.5">
-              Ready to mount
-            </span>
-          </div>
-
-          <div className="bg-neutral-950/60 p-2.5 rounded-2xl border border-neutral-800/40">
-            <span className="text-[9px] text-neutral-400 block font-mono-tech uppercase">Avg Cost / Wear</span>
-            <span className="text-sm font-bold text-neutral-100 font-mono-tech">
-              ${Math.round(metrics.averageCostPerWear)}
-            </span>
-            <span className="text-[9px] text-amber-400 block font-mono-tech mt-0.5">
-              {metrics.totalWears} Total Wears
-            </span>
+          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-500 to-violet-500 text-white flex items-center justify-center shadow-xs">
+            <Watch className="w-5 h-5" />
           </div>
         </div>
       </div>
 
-      {/* Inside Collection Segment Selector: Watches vs Straps */}
-      <div className="flex items-center justify-between p-1 bg-neutral-900/90 border border-neutral-800 rounded-2xl">
+      {/* 2. Quick Action Grid (Matching Reference Design: 4 Square Cards) */}
+      <div className="bg-white p-3.5 rounded-3xl border border-slate-200/80 shadow-xs space-y-2.5">
+        <div className="flex items-center justify-between px-1">
+          <span className="text-xs font-bold text-slate-700">Quick Actions</span>
+          <span className="text-[10px] text-slate-400 font-mono-tech">Instant Studio</span>
+        </div>
+
+        <div className="grid grid-cols-4 gap-2">
+          {/* Action 1: Wrist Scan */}
+          <button
+            onClick={onOpenPhotoModal}
+            className="flex flex-col items-center justify-center p-2.5 rounded-2xl bg-slate-50 hover:bg-indigo-50/80 border border-slate-100 hover:border-indigo-200 text-slate-700 hover:text-indigo-600 transition-all shadow-2xs group"
+          >
+            <div className="w-8 h-8 rounded-xl bg-white flex items-center justify-center text-indigo-600 shadow-2xs group-hover:scale-105 transition-transform mb-1.5">
+              <Camera className="w-4 h-4" />
+            </div>
+            <span className="text-[11px] font-semibold">Scan Wrist</span>
+          </button>
+
+          {/* Action 2: Add Watch */}
+          <button
+            onClick={onOpenAddWatch}
+            className="flex flex-col items-center justify-center p-2.5 rounded-2xl bg-slate-50 hover:bg-indigo-50/80 border border-slate-100 hover:border-indigo-200 text-slate-700 hover:text-indigo-600 transition-all shadow-2xs group"
+          >
+            <div className="w-8 h-8 rounded-xl bg-white flex items-center justify-center text-indigo-600 shadow-2xs group-hover:scale-105 transition-transform mb-1.5">
+              <Plus className="w-4 h-4" />
+            </div>
+            <span className="text-[11px] font-semibold">Add Watch</span>
+          </button>
+
+          {/* Action 3: Photo Gallery */}
+          <button
+            onClick={onOpenGallery}
+            className="flex flex-col items-center justify-center p-2.5 rounded-2xl bg-slate-50 hover:bg-indigo-50/80 border border-slate-100 hover:border-indigo-200 text-slate-700 hover:text-indigo-600 transition-all shadow-2xs group"
+          >
+            <div className="w-8 h-8 rounded-xl bg-white flex items-center justify-center text-indigo-600 shadow-2xs group-hover:scale-105 transition-transform mb-1.5">
+              <Images className="w-4 h-4" />
+            </div>
+            <span className="text-[11px] font-semibold">Gallery</span>
+          </button>
+
+          {/* Action 4: Appraisal */}
+          <button
+            onClick={onOpenInsurance}
+            className="flex flex-col items-center justify-center p-2.5 rounded-2xl bg-slate-50 hover:bg-indigo-50/80 border border-slate-100 hover:border-indigo-200 text-slate-700 hover:text-indigo-600 transition-all shadow-2xs group"
+          >
+            <div className="w-8 h-8 rounded-xl bg-white flex items-center justify-center text-indigo-600 shadow-2xs group-hover:scale-105 transition-transform mb-1.5">
+              <FileText className="w-4 h-4" />
+            </div>
+            <span className="text-[11px] font-semibold">Appraisal</span>
+          </button>
+        </div>
+      </div>
+
+      {/* 3. Portfolio Key Metrics Summary */}
+      <div className="grid grid-cols-3 gap-2">
+        <div className="bg-white p-3 rounded-2xl border border-slate-200/80 shadow-xs">
+          <span className="text-[10px] text-slate-400 font-bold block uppercase tracking-tight">Appraised Value</span>
+          <span className="text-sm font-bold text-slate-900 font-mono-tech mt-0.5 block">
+            ${metrics.totalMarketValue.toLocaleString()}
+          </span>
+          <span className="text-[10px] text-emerald-600 font-semibold block mt-0.5">
+            {watches.length} Timepieces
+          </span>
+        </div>
+
+        <div className="bg-white p-3 rounded-2xl border border-slate-200/80 shadow-xs">
+          <span className="text-[10px] text-slate-400 font-bold block uppercase tracking-tight">Strap Wardrobe</span>
+          <span className="text-sm font-bold text-indigo-600 font-mono-tech mt-0.5 block">
+            {straps.length} Straps
+          </span>
+          <span className="text-[10px] text-slate-500 font-semibold block mt-0.5">
+            Ready to mount
+          </span>
+        </div>
+
+        <div className="bg-white p-3 rounded-2xl border border-slate-200/80 shadow-xs">
+          <span className="text-[10px] text-slate-400 font-bold block uppercase tracking-tight">Cost / Wear</span>
+          <span className="text-sm font-bold text-slate-900 font-mono-tech mt-0.5 block">
+            ${Math.round(metrics.averageCostPerWear)}
+          </span>
+          <span className="text-[10px] text-amber-600 font-semibold block mt-0.5">
+            {metrics.totalWears} Total Wears
+          </span>
+        </div>
+      </div>
+
+      {/* 4. Inside Collection Segment Switcher: Watches vs Straps */}
+      <div className="flex items-center justify-between p-1 bg-slate-200/70 border border-slate-200 rounded-2xl">
         <button
           onClick={() => setBoxSection('watches')}
-          className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-mono-tech font-semibold transition-all ${
+          className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-semibold transition-all ${
             boxSection === 'watches'
-              ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-sm'
-              : 'text-neutral-400 hover:text-neutral-200'
+              ? 'bg-white text-indigo-600 shadow-xs font-bold'
+              : 'text-slate-600 hover:text-slate-900'
           }`}
         >
           <Watch className="w-3.5 h-3.5" />
@@ -247,10 +295,10 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
 
         <button
           onClick={() => setBoxSection('straps')}
-          className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-mono-tech font-semibold transition-all ${
+          className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-semibold transition-all ${
             boxSection === 'straps'
-              ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-sm'
-              : 'text-neutral-400 hover:text-neutral-200'
+              ? 'bg-white text-indigo-600 shadow-xs font-bold'
+              : 'text-slate-600 hover:text-slate-900'
           }`}
         >
           <Disc className="w-3.5 h-3.5" />
@@ -261,57 +309,57 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
       {/* SECTION 1: WATCHES SUBSECTION */}
       {boxSection === 'watches' && (
         <div className="space-y-3">
-          {/* Header Controls: Left (View Toggles + Single Sort Button) vs Right (+ Add Watch Alone) */}
+          {/* Header Controls: Left (View Toggles + Single Sort Button) vs Right (+ Add Watch) */}
           <div className="flex items-center justify-between gap-2">
             {/* Left Group: View Mode (Swipe/Scroll) & Single Sort Button */}
             <div className="flex items-center gap-1.5">
-              <div className="flex items-center gap-1 bg-neutral-900 p-1 rounded-2xl border border-neutral-800 shrink-0">
+              <div className="flex items-center gap-1 bg-white p-1 rounded-2xl border border-slate-200/90 shrink-0 shadow-2xs">
                 <button
                   onClick={() => setWatchViewMode('swipe')}
                   className={`p-1.5 rounded-xl transition-all ${
                     watchViewMode === 'swipe'
-                      ? 'bg-amber-500 text-neutral-950 shadow-sm'
-                      : 'text-neutral-400 hover:text-neutral-200'
+                      ? 'bg-indigo-600 text-white shadow-2xs'
+                      : 'text-slate-500 hover:text-slate-800'
                   }`}
                   title="Swipe View"
                 >
-                  <ArrowLeftRight className="w-4 h-4" />
+                  <ArrowLeftRight className="w-3.5 h-3.5" />
                 </button>
                 <button
                   onClick={() => setWatchViewMode('scroll')}
                   className={`p-1.5 rounded-xl transition-all ${
                     watchViewMode === 'scroll'
-                      ? 'bg-amber-500 text-neutral-950 shadow-sm'
-                      : 'text-neutral-400 hover:text-neutral-200'
+                      ? 'bg-indigo-600 text-white shadow-2xs'
+                      : 'text-slate-500 hover:text-slate-800'
                   }`}
                   title="Scroll View"
                 >
-                  <List className="w-4 h-4" />
+                  <List className="w-3.5 h-3.5" />
                 </button>
               </div>
 
               {/* Single Clean Sort Button */}
               <button
                 onClick={() => setShowWatchSortMenu(!showWatchSortMenu)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[11px] font-mono-tech border transition-all ${
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all shadow-2xs ${
                   showWatchSortMenu || watchFilterMovement !== 'all' || watchSortBy !== 'default'
-                    ? 'bg-amber-500/20 text-amber-300 border-amber-500/50 font-semibold'
-                    : 'bg-neutral-900 text-neutral-300 border-neutral-800 hover:bg-neutral-800'
+                    ? 'bg-indigo-50 text-indigo-700 border-indigo-200'
+                    : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
                 }`}
                 title="Open Sorting & Filters"
               >
-                <SlidersHorizontal className="w-3.5 h-3.5 text-amber-400" />
-                <span>Sort</span>
+                <SlidersHorizontal className="w-3.5 h-3.5 text-indigo-600" />
+                <span>Filter & Sort</span>
                 {(watchFilterMovement !== 'all' || watchSortBy !== 'default') && (
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-600" />
                 )}
               </button>
             </div>
 
-            {/* Right Group: Primary Creation Action Alone */}
+            {/* Right Group: Add Watch Button */}
             <button
               onClick={onOpenAddWatch}
-              className="flex items-center gap-1 text-[11px] font-mono-tech text-amber-400 bg-amber-500/10 border border-amber-500/30 px-3.5 py-1.5 rounded-xl hover:bg-amber-500/20 transition-colors font-semibold shrink-0 shadow-sm"
+              className="flex items-center gap-1 text-xs font-semibold text-indigo-600 bg-indigo-50 border border-indigo-200 px-3.5 py-1.5 rounded-xl hover:bg-indigo-100 transition-colors shrink-0 shadow-2xs"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Add Watch</span>
@@ -320,15 +368,15 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
 
           {/* Expandable Sort & Filter Menu for Watches */}
           {showWatchSortMenu && (
-            <div className="bg-neutral-900/95 border border-neutral-800 rounded-2xl p-3.5 space-y-3 shadow-xl text-xs font-mono-tech animate-in fade-in zoom-in-95 duration-150">
+            <div className="bg-white border border-slate-200 rounded-2xl p-3.5 space-y-3 shadow-md text-xs animate-in fade-in zoom-in-95 duration-150">
               {/* Movement Type Filter */}
               <div>
-                <span className="text-[10px] text-neutral-400 uppercase tracking-wider block mb-1.5 font-semibold">
+                <span className="text-[10px] text-slate-400 uppercase tracking-wider block mb-1.5 font-bold font-mono-tech">
                   Movement Filter
                 </span>
                 <div className="flex flex-wrap gap-1.5">
                   {[
-                    { id: 'all', label: 'All' },
+                    { id: 'all', label: 'All Calibers' },
                     { id: 'automatic', label: 'Automatic' },
                     { id: 'manual', label: 'Manual' },
                     { id: 'quartz', label: 'Quartz' },
@@ -337,10 +385,10 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
                     <button
                       key={item.id}
                       onClick={() => setWatchFilterMovement(item.id)}
-                      className={`px-2.5 py-1 rounded-lg text-[11px] transition-colors ${
+                      className={`px-2.5 py-1 rounded-xl text-xs font-semibold transition-colors ${
                         watchFilterMovement === item.id
-                          ? 'bg-amber-500 text-neutral-950 font-bold shadow-xs'
-                          : 'bg-neutral-800/90 text-neutral-400 hover:text-neutral-200 border border-neutral-700/60'
+                          ? 'bg-indigo-600 text-white shadow-2xs'
+                          : 'bg-slate-50 text-slate-600 hover:text-slate-900 border border-slate-200/80'
                       }`}
                     >
                       {item.label}
@@ -351,7 +399,7 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
 
               {/* Sort Order */}
               <div>
-                <span className="text-[10px] text-neutral-400 uppercase tracking-wider block mb-1.5 font-semibold">
+                <span className="text-[10px] text-slate-400 uppercase tracking-wider block mb-1.5 font-bold font-mono-tech">
                   Sort Order
                 </span>
                 <div className="flex flex-wrap gap-1.5">
@@ -366,10 +414,10 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
                     <button
                       key={item.id}
                       onClick={() => setWatchSortBy(item.id)}
-                      className={`px-2.5 py-1 rounded-lg text-[11px] transition-colors ${
+                      className={`px-2.5 py-1 rounded-xl text-xs font-semibold transition-colors ${
                         watchSortBy === item.id
-                          ? 'bg-amber-500 text-neutral-950 font-bold shadow-xs'
-                          : 'bg-neutral-800/90 text-neutral-400 hover:text-neutral-200 border border-neutral-700/60'
+                          ? 'bg-indigo-600 text-white shadow-2xs'
+                          : 'bg-slate-50 text-slate-600 hover:text-slate-900 border border-slate-200/80'
                       }`}
                     >
                       {item.label}
@@ -393,10 +441,10 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
                 return (
                   <div
                     onClick={() => onSelectWatch(currentWatch)}
-                    className="bg-gradient-to-b from-neutral-900 via-neutral-900/90 to-neutral-950 border border-neutral-800 hover:border-amber-500/60 rounded-3xl p-4 shadow-xl cursor-pointer group transition-all relative overflow-hidden"
+                    className="bg-white border border-slate-200/90 hover:border-indigo-300 rounded-3xl p-4 shadow-sm cursor-pointer group transition-all relative overflow-hidden"
                   >
                     {/* Big Showcase Dial / Image Card */}
-                    <div className="relative rounded-2xl overflow-hidden bg-neutral-950 border border-neutral-800/80 h-56 flex items-center justify-center p-2">
+                    <div className="relative rounded-2xl overflow-hidden bg-slate-50 border border-slate-200/80 h-56 flex items-center justify-center p-2">
                       {/* Sweeping Live Dial Canvas */}
                       <div className="transform group-hover:scale-105 transition-transform duration-300 flex items-center justify-center">
                         <WatchDialCanvas
@@ -410,10 +458,10 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
 
                       {/* Top Badges */}
                       <div className="absolute top-3 left-3 flex items-center gap-1.5">
-                        <span className="bg-neutral-950/85 backdrop-blur border border-neutral-800 text-amber-300 text-[10px] font-mono-tech px-2.5 py-1 rounded-full font-bold">
+                        <span className="bg-white/90 backdrop-blur border border-slate-200 text-slate-800 text-[10px] font-mono-tech px-2.5 py-1 rounded-full font-bold shadow-2xs">
                           {currentWatch.dimensions.caseDiameterMm}mm • {currentWatch.dimensions.lugWidthMm}mm Lug
                         </span>
-                        <span className="bg-neutral-900/85 backdrop-blur border border-neutral-800 text-neutral-300 text-[10px] font-mono-tech px-2 py-1 rounded-full">
+                        <span className="bg-white/90 backdrop-blur border border-slate-200 text-slate-600 text-[10px] font-mono-tech px-2 py-1 rounded-full shadow-2xs">
                           {currentWatch.waterResistanceMeters}m WR
                         </span>
                       </div>
@@ -421,17 +469,17 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
                       {/* WOTD Status Badge */}
                       <div className="absolute top-3 right-3">
                         {isWotd ? (
-                          <span className="bg-amber-400 text-neutral-950 font-bold px-2.5 py-1 rounded-full text-[10px] font-mono-tech flex items-center gap-1 shadow-lg">
+                          <span className="bg-indigo-600 text-white font-bold px-2.5 py-1 rounded-full text-[10px] font-mono-tech flex items-center gap-1 shadow-sm">
                             <Check className="w-3 h-3 stroke-[3]" /> Wearing Today
                           </span>
                         ) : daysSince > 14 ? (
-                          <span className="bg-amber-950/90 text-amber-300 border border-amber-700/80 px-2.5 py-1 rounded-full text-[10px] font-mono-tech">
+                          <span className="bg-amber-50 text-amber-800 border border-amber-300 px-2.5 py-1 rounded-full text-[10px] font-mono-tech font-semibold">
                             Idle {daysSince}d
                           </span>
                         ) : (
                           <button
                             onClick={(e) => handleQuickWotd(e, currentWatch.id)}
-                            className="bg-neutral-900/90 hover:bg-amber-500/20 text-neutral-300 hover:text-amber-200 border border-neutral-700 px-2.5 py-1 rounded-full text-[10px] font-mono-tech transition-colors"
+                            className="bg-white hover:bg-indigo-50 text-indigo-600 border border-slate-200 px-2.5 py-1 rounded-full text-[10px] font-mono-tech font-semibold transition-colors shadow-2xs"
                           >
                             + Wear
                           </button>
@@ -442,23 +490,23 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
                     {/* Watch Info Details */}
                     <div className="mt-3.5 flex items-start justify-between">
                       <div>
-                        <span className="text-[10px] font-mono-tech text-amber-400 uppercase tracking-wider font-semibold">
+                        <span className="text-[11px] font-bold text-indigo-600 uppercase tracking-wider font-mono-tech">
                           {currentWatch.brand}
                         </span>
-                        <h3 className="font-serif-luxury text-base font-bold text-neutral-100 mt-0.5">
+                        <h3 className="text-base font-bold text-slate-900 mt-0.5">
                           {currentWatch.nickname || currentWatch.model}
                         </h3>
-                        <p className="text-xs text-neutral-400 mt-0.5">
+                        <p className="text-xs text-slate-500 mt-0.5 font-medium">
                           {currentWatch.caliber.name} • {currentWatch.caliber.type}
                           {mountedStrap && ` • on ${mountedStrap.name}`}
                         </p>
                       </div>
 
                       <div className="text-right font-mono-tech">
-                        <span className="text-sm font-bold text-neutral-100">
+                        <span className="text-sm font-bold text-slate-900 block">
                           ${(currentWatch.marketValueUsd || currentWatch.purchasePriceUsd).toLocaleString()}
                         </span>
-                        <span className="text-[10px] text-amber-300/90 block">
+                        <span className="text-[10px] text-indigo-600 font-semibold block">
                           ${Math.round(costPerWear)}/wear
                         </span>
                       </div>
@@ -466,12 +514,12 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
 
                     {/* Carousel Navigation Controller */}
                     <div
-                      className="mt-4 pt-3 border-t border-neutral-800/80 flex items-center justify-between"
+                      className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between"
                       onClick={(e) => e.stopPropagation()}
                     >
                       <button
                         onClick={handlePrevWatchSwipe}
-                        className="p-2 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-neutral-200 transition-colors"
+                        className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors"
                         title="Previous Timepiece"
                       >
                         <ChevronLeft className="w-4 h-4" />
@@ -483,7 +531,7 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
                             key={i}
                             onClick={() => setWatchSwipeIndex(i)}
                             className={`h-2 rounded-full transition-all ${
-                              i === watchSwipeIndex ? 'w-6 bg-amber-400' : 'w-2 bg-neutral-700'
+                              i === watchSwipeIndex ? 'w-6 bg-indigo-600' : 'w-2 bg-slate-300'
                             }`}
                           />
                         ))}
@@ -491,7 +539,7 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
 
                       <button
                         onClick={handleNextWatchSwipe}
-                        className="p-2 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-neutral-200 transition-colors"
+                        className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors"
                         title="Next Timepiece"
                       >
                         <ChevronRight className="w-4 h-4" />
@@ -515,10 +563,10 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
                   <div
                     key={watch.id}
                     onClick={() => onSelectWatch(watch)}
-                    className="p-3 rounded-2xl bg-neutral-900/80 hover:bg-neutral-900 border border-neutral-800 hover:border-amber-500/60 transition-all cursor-pointer flex items-center justify-between gap-3 shadow-md group"
+                    className="p-3 rounded-2xl bg-white hover:bg-slate-50/80 border border-slate-200/90 hover:border-indigo-300 transition-all cursor-pointer flex items-center justify-between gap-3 shadow-xs group"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="w-14 h-14 rounded-xl bg-neutral-950 border border-neutral-800 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform overflow-hidden">
+                      <div className="w-14 h-14 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform overflow-hidden shadow-2xs">
                         <WatchDialCanvas
                           brand={watch.brand}
                           model={watch.nickname || watch.model}
@@ -529,26 +577,26 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
                       </div>
                       <div>
                         <div className="flex items-center gap-1.5">
-                          <span className="text-[10px] font-mono-tech text-amber-400 font-semibold uppercase">
+                          <span className="text-[10px] font-bold text-indigo-600 uppercase font-mono-tech">
                             {watch.brand}
                           </span>
                           {isWotd && (
-                            <span className="text-[9px] text-neutral-950 bg-amber-400 px-1.5 py-0.2 rounded font-bold font-mono-tech">
+                            <span className="text-[9px] text-white bg-indigo-600 px-1.5 py-0.2 rounded font-bold font-mono-tech">
                               ON WRIST
                             </span>
                           )}
                         </div>
-                        <h4 className="font-medium text-xs text-neutral-100 mt-0.5 truncate max-w-[170px]">
+                        <h4 className="font-semibold text-xs text-slate-900 mt-0.5 truncate max-w-[170px]">
                           {watch.nickname || watch.model}
                         </h4>
-                        <div className="flex items-center gap-2 text-[10px] text-neutral-400 font-mono-tech mt-1">
-                          <span className="text-amber-300 font-semibold">{watch.dimensions.caseDiameterMm}mm</span>
+                        <div className="flex items-center gap-2 text-[10px] text-slate-500 font-mono-tech mt-1">
+                          <span className="text-slate-800 font-semibold">{watch.dimensions.caseDiameterMm}mm</span>
                           <span>•</span>
                           <span>{watch.caliber.type}</span>
                           {mountedStrap && (
                             <>
                               <span>•</span>
-                              <span className="text-neutral-500 truncate max-w-[90px]">{mountedStrap.name}</span>
+                              <span className="text-slate-400 truncate max-w-[90px]">{mountedStrap.name}</span>
                             </>
                           )}
                         </div>
@@ -556,10 +604,10 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
                     </div>
 
                     <div className="text-right shrink-0 font-mono-tech">
-                      <span className="font-bold text-xs text-neutral-200 block">
+                      <span className="font-bold text-xs text-slate-900 block">
                         ${(watch.marketValueUsd || watch.purchasePriceUsd).toLocaleString()}
                       </span>
-                      <span className="text-[9px] text-amber-400 block mt-0.5">
+                      <span className="text-[10px] text-indigo-600 font-semibold block mt-0.5">
                         ${Math.round(costPerWear)}/wear
                       </span>
                     </div>
@@ -571,60 +619,57 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
         </div>
       )}
 
-      {/* SECTION 2: STRAPS WARDROBE (Inside Collection) */}
+      {/* SECTION 2: STRAPS WARDROBE */}
       {boxSection === 'straps' && (
         <div className="space-y-3">
-          {/* Straps Header Controls: Left (View Toggles + Single Filter Button) vs Right (+ Add Strap Alone) */}
+          {/* Straps Header Controls */}
           <div className="flex items-center justify-between gap-2">
-            {/* Left Group: View Mode (Swipe/Scroll) & Single Filter Button */}
             <div className="flex items-center gap-1.5">
-              <div className="flex items-center gap-1 bg-neutral-900 p-1 rounded-2xl border border-neutral-800 shrink-0">
+              <div className="flex items-center gap-1 bg-white p-1 rounded-2xl border border-slate-200 shrink-0 shadow-2xs">
                 <button
                   onClick={() => setStrapViewMode('swipe')}
                   className={`p-1.5 rounded-xl transition-all ${
                     strapViewMode === 'swipe'
-                      ? 'bg-amber-500 text-neutral-950 shadow-sm'
-                      : 'text-neutral-400 hover:text-neutral-200'
+                      ? 'bg-indigo-600 text-white shadow-2xs'
+                      : 'text-slate-500 hover:text-slate-800'
                   }`}
                   title="Swipe View"
                 >
-                  <ArrowLeftRight className="w-4 h-4" />
+                  <ArrowLeftRight className="w-3.5 h-3.5" />
                 </button>
                 <button
                   onClick={() => setStrapViewMode('scroll')}
                   className={`p-1.5 rounded-xl transition-all ${
                     strapViewMode === 'scroll'
-                      ? 'bg-amber-500 text-neutral-950 shadow-sm'
-                      : 'text-neutral-400 hover:text-neutral-200'
+                      ? 'bg-indigo-600 text-white shadow-2xs'
+                      : 'text-slate-500 hover:text-slate-800'
                   }`}
                   title="Scroll View"
                 >
-                  <List className="w-4 h-4" />
+                  <List className="w-3.5 h-3.5" />
                 </button>
               </div>
 
-              {/* Single Clean Filter Button */}
               <button
                 onClick={() => setShowStrapSortMenu(!showStrapSortMenu)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[11px] font-mono-tech border transition-all ${
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all shadow-2xs ${
                   showStrapSortMenu || strapFilterLug !== 'all' || strapFilterMaterial !== 'all'
-                    ? 'bg-amber-500/20 text-amber-300 border-amber-500/50 font-semibold'
-                    : 'bg-neutral-900 text-neutral-300 border-neutral-800 hover:bg-neutral-800'
+                    ? 'bg-indigo-50 text-indigo-700 border-indigo-200'
+                    : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
                 }`}
                 title="Open Strap Filters"
               >
-                <SlidersHorizontal className="w-3.5 h-3.5 text-amber-400" />
-                <span>Filter</span>
+                <SlidersHorizontal className="w-3.5 h-3.5 text-indigo-600" />
+                <span>Filter Straps</span>
                 {(strapFilterLug !== 'all' || strapFilterMaterial !== 'all') && (
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-600" />
                 )}
               </button>
             </div>
 
-            {/* Right Group: Primary Creation Action Alone */}
             <button
               onClick={() => setShowAddStrapModal(true)}
-              className="flex items-center gap-1 text-[11px] font-mono-tech text-amber-400 bg-amber-500/10 border border-amber-500/30 px-3.5 py-1.5 rounded-xl hover:bg-amber-500/20 transition-colors font-semibold shrink-0 shadow-sm"
+              className="flex items-center gap-1 text-xs font-semibold text-indigo-600 bg-indigo-50 border border-indigo-200 px-3.5 py-1.5 rounded-xl hover:bg-indigo-100 transition-colors shrink-0 shadow-2xs"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Add Strap</span>
@@ -633,10 +678,9 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
 
           {/* Expandable Filter Menu for Straps */}
           {showStrapSortMenu && (
-            <div className="bg-neutral-900/95 border border-neutral-800 rounded-2xl p-3.5 space-y-3 shadow-xl text-xs font-mono-tech animate-in fade-in zoom-in-95 duration-150">
-              {/* Lug Width */}
+            <div className="bg-white border border-slate-200 rounded-2xl p-3.5 space-y-3 shadow-md text-xs animate-in fade-in zoom-in-95 duration-150">
               <div>
-                <span className="text-[10px] text-neutral-400 uppercase tracking-wider block mb-1.5 font-semibold">
+                <span className="text-[10px] text-slate-400 uppercase tracking-wider block mb-1.5 font-bold font-mono-tech">
                   Lug Width
                 </span>
                 <div className="flex flex-wrap gap-1.5">
@@ -644,10 +688,10 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
                     <button
                       key={lug}
                       onClick={() => setStrapFilterLug(lug)}
-                      className={`px-2.5 py-1 rounded-lg text-[11px] transition-colors ${
+                      className={`px-2.5 py-1 rounded-xl text-xs font-semibold transition-colors ${
                         strapFilterLug === lug
-                          ? 'bg-amber-500 text-neutral-950 font-bold shadow-xs'
-                          : 'bg-neutral-800/90 text-neutral-400 hover:text-neutral-200 border border-neutral-700/60'
+                          ? 'bg-indigo-600 text-white shadow-2xs'
+                          : 'bg-slate-50 text-slate-600 hover:text-slate-900 border border-slate-200/80'
                       }`}
                     >
                       {lug === 'all' ? 'All Lugs' : `${lug}mm`}
@@ -656,9 +700,8 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
                 </div>
               </div>
 
-              {/* Material */}
               <div>
-                <span className="text-[10px] text-neutral-400 uppercase tracking-wider block mb-1.5 font-semibold">
+                <span className="text-[10px] text-slate-400 uppercase tracking-wider block mb-1.5 font-bold font-mono-tech">
                   Strap Material
                 </span>
                 <div className="flex flex-wrap gap-1.5">
@@ -676,10 +719,10 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
                     <button
                       key={mat.id}
                       onClick={() => setStrapFilterMaterial(mat.id)}
-                      className={`px-2.5 py-1 rounded-lg text-[11px] transition-colors ${
+                      className={`px-2.5 py-1 rounded-xl text-xs font-semibold transition-colors ${
                         strapFilterMaterial === mat.id
-                          ? 'bg-amber-500 text-neutral-950 font-bold shadow-xs'
-                          : 'bg-neutral-800/90 text-neutral-400 hover:text-neutral-200 border border-neutral-700/60'
+                          ? 'bg-indigo-600 text-white shadow-2xs'
+                          : 'bg-slate-50 text-slate-600 hover:text-slate-900 border border-slate-200/80'
                       }`}
                     >
                       {mat.label}
@@ -700,10 +743,10 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
                 return (
                   <div 
                     onClick={() => setSelectedStrapForModal(currentStrap)}
-                    className="bg-gradient-to-b from-neutral-900 to-neutral-950 border border-neutral-800 rounded-3xl p-4 shadow-xl cursor-pointer group hover:border-amber-500/60 transition-all relative overflow-hidden"
+                    className="bg-white border border-slate-200/90 rounded-3xl p-4 shadow-sm cursor-pointer group hover:border-indigo-300 transition-all relative overflow-hidden"
                   >
                     {/* Big Strap Preview Image */}
-                    <div className="relative rounded-2xl overflow-hidden bg-neutral-950 border border-neutral-800 h-52 flex items-center justify-center">
+                    <div className="relative rounded-2xl overflow-hidden bg-slate-50 border border-slate-200 h-52 flex items-center justify-center">
                       <img
                         src={currentStrap.imageUrl}
                         alt={currentStrap.name}
@@ -713,12 +756,12 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
                       
                       {/* Top Badges */}
                       <div className="absolute top-3 left-3 flex items-center gap-1.5">
-                        <span className="bg-neutral-950/80 backdrop-blur border border-neutral-800 text-amber-400 text-[10px] font-mono-tech px-2.5 py-1 rounded-full font-bold">
+                        <span className="bg-white/90 backdrop-blur border border-slate-200 text-slate-800 text-[10px] font-mono-tech px-2.5 py-1 rounded-full font-bold shadow-2xs">
                           {currentStrap.lugWidthMm}mm Lug
                         </span>
                         {currentStrap.waterproof && (
-                          <span className="bg-cyan-950/80 backdrop-blur border border-cyan-800 text-cyan-300 text-[10px] font-mono-tech px-2 py-1 rounded-full flex items-center gap-1">
-                            <Droplets className="w-3 h-3" /> Waterproof
+                          <span className="bg-cyan-50 border border-cyan-200 text-cyan-800 text-[10px] font-mono-tech px-2 py-1 rounded-full flex items-center gap-1 font-semibold">
+                            <Droplets className="w-3 h-3 text-cyan-600" /> Waterproof
                           </span>
                         )}
                       </div>
@@ -726,11 +769,11 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
                       {/* Mounted Status Badge */}
                       <div className="absolute top-3 right-3">
                         {mountedWatch ? (
-                          <span className="bg-emerald-950/90 text-emerald-300 border border-emerald-700/80 px-2.5 py-1 rounded-full text-[10px] font-mono-tech flex items-center gap-1 shadow-lg">
-                            <Check className="w-3 h-3" /> Mounted on {mountedWatch.brand}
+                          <span className="bg-emerald-50 text-emerald-800 border border-emerald-300 px-2.5 py-1 rounded-full text-[10px] font-mono-tech flex items-center gap-1 shadow-2xs font-semibold">
+                            <Check className="w-3 h-3 text-emerald-600" /> Mounted: {mountedWatch.brand}
                           </span>
                         ) : (
-                          <span className="bg-neutral-900/90 text-neutral-300 border border-neutral-700 px-2.5 py-1 rounded-full text-[10px] font-mono-tech">
+                          <span className="bg-white/90 text-slate-600 border border-slate-200 px-2.5 py-1 rounded-full text-[10px] font-mono-tech shadow-2xs">
                             In Wardrobe
                           </span>
                         )}
@@ -740,30 +783,30 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
                     {/* Strap Info Details */}
                     <div className="mt-3.5 flex items-start justify-between">
                       <div>
-                        <span className="text-[10px] font-mono-tech text-amber-400 uppercase tracking-wider font-semibold">
+                        <span className="text-[11px] font-bold text-indigo-600 uppercase tracking-wider font-mono-tech">
                           {currentStrap.brand}
                         </span>
-                        <h3 className="font-serif-luxury text-base font-bold text-neutral-100 mt-0.5">
+                        <h3 className="text-base font-bold text-slate-900 mt-0.5">
                           {currentStrap.name}
                         </h3>
-                        <p className="text-xs text-neutral-400 mt-0.5">
+                        <p className="text-xs text-slate-500 mt-0.5 font-medium">
                           {currentStrap.material} • {currentStrap.color}
                         </p>
                       </div>
 
                       <div className="text-right font-mono-tech">
-                        <span className="text-sm font-bold text-neutral-100">${currentStrap.priceUsd}</span>
-                        <span className="text-[10px] text-neutral-500 block">
+                        <span className="text-sm font-bold text-slate-900">${currentStrap.priceUsd}</span>
+                        <span className="text-[10px] text-slate-400 block">
                           Taper: {currentStrap.buckleWidthMm}mm
                         </span>
                       </div>
                     </div>
 
                     {/* Carousel Navigation Controller */}
-                    <div className="mt-4 pt-3 border-t border-neutral-800/80 flex items-center justify-between" onClick={(e) => e.stopPropagation()}>
+                    <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between" onClick={(e) => e.stopPropagation()}>
                       <button
                         onClick={handlePrevStrapSwipe}
-                        className="p-2 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-neutral-200 transition-colors"
+                        className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors"
                         title="Previous Strap"
                       >
                         <ChevronLeft className="w-4 h-4" />
@@ -775,7 +818,7 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
                             key={i}
                             onClick={() => setStrapSwipeIndex(i)}
                             className={`h-2 rounded-full transition-all ${
-                              i === strapSwipeIndex ? 'w-6 bg-amber-400' : 'w-2 bg-neutral-700'
+                              i === strapSwipeIndex ? 'w-6 bg-indigo-600' : 'w-2 bg-slate-300'
                             }`}
                           />
                         ))}
@@ -783,7 +826,7 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
 
                       <button
                         onClick={handleNextStrapSwipe}
-                        className="p-2 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-neutral-200 transition-colors"
+                        className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors"
                         title="Next Strap"
                       >
                         <ChevronRight className="w-4 h-4" />
@@ -805,27 +848,27 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
                   <div
                     key={strap.id}
                     onClick={() => setSelectedStrapForModal(strap)}
-                    className="p-3 rounded-2xl bg-neutral-900/80 hover:bg-neutral-900 border border-neutral-800 hover:border-amber-500/60 transition-all cursor-pointer flex items-center justify-between gap-3 shadow-md group"
+                    className="p-3 rounded-2xl bg-white hover:bg-slate-50/80 border border-slate-200/90 hover:border-indigo-300 transition-all cursor-pointer flex items-center justify-between gap-3 shadow-xs group"
                   >
                     <div className="flex items-center gap-3">
                       <img
                         src={strap.imageUrl}
                         alt={strap.name}
-                        className="w-14 h-14 rounded-xl object-cover border border-neutral-800 shrink-0 group-hover:scale-105 transition-transform"
+                        className="w-14 h-14 rounded-xl object-cover border border-slate-200 shrink-0 group-hover:scale-105 transition-transform shadow-2xs"
                         referrerPolicy="no-referrer"
                       />
                       <div>
                         <div className="flex items-center gap-1.5">
-                          <span className="text-[10px] font-mono-tech text-amber-400 font-semibold uppercase">{strap.brand}</span>
+                          <span className="text-[10px] font-bold text-indigo-600 uppercase font-mono-tech">{strap.brand}</span>
                           {strap.waterproof && (
-                            <span className="text-[9px] text-cyan-400 bg-cyan-950/60 px-1 rounded flex items-center gap-0.5 font-mono-tech">
-                              <Droplets className="w-2.5 h-2.5" /> Waterproof
+                            <span className="text-[9px] text-cyan-800 bg-cyan-50 px-1 rounded flex items-center gap-0.5 font-mono-tech font-semibold">
+                              <Droplets className="w-2.5 h-2.5 text-cyan-600" /> Waterproof
                             </span>
                           )}
                         </div>
-                        <h4 className="font-medium text-xs text-neutral-100 mt-0.5">{strap.name}</h4>
-                        <div className="flex items-center gap-2 text-[10px] text-neutral-400 font-mono-tech mt-1">
-                          <span className="text-amber-300 font-semibold">{strap.lugWidthMm}mm Lug</span>
+                        <h4 className="font-semibold text-xs text-slate-900 mt-0.5">{strap.name}</h4>
+                        <div className="flex items-center gap-2 text-[10px] text-slate-500 font-mono-tech mt-1">
+                          <span className="text-slate-800 font-semibold">{strap.lugWidthMm}mm Lug</span>
                           <span>•</span>
                           <span>{strap.material}</span>
                         </div>
@@ -833,11 +876,11 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
                     </div>
 
                     <div className="text-right shrink-0 font-mono-tech">
-                      <span className="font-bold text-xs text-neutral-200 block">${strap.priceUsd}</span>
+                      <span className="font-bold text-xs text-slate-900 block">${strap.priceUsd}</span>
                       {mountedWatch ? (
-                        <span className="text-[9px] text-emerald-400 block mt-0.5">Mounted: {mountedWatch.brand}</span>
+                        <span className="text-[9px] text-emerald-600 font-semibold block mt-0.5">Mounted: {mountedWatch.brand}</span>
                       ) : (
-                        <span className="text-[9px] text-neutral-500 block mt-0.5">In Wardrobe</span>
+                        <span className="text-[9px] text-slate-400 block mt-0.5">In Wardrobe</span>
                       )}
                     </div>
                   </div>
@@ -863,45 +906,45 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
 
       {/* Add Strap Modal */}
       {showAddStrapModal && (
-        <div className="fixed inset-0 z-60 bg-black/90 flex items-center justify-center p-4">
-          <div className="bg-neutral-900 border border-neutral-700 rounded-3xl p-4 w-full max-w-sm space-y-3 shadow-2xl">
-            <div className="flex items-center justify-between border-b border-neutral-800 pb-2">
-              <h4 className="text-xs font-bold font-serif-luxury text-amber-300">Add Strap to Wardrobe</h4>
-              <button onClick={() => setShowAddStrapModal(false)} className="text-neutral-400 hover:text-white">
+        <div className="fixed inset-0 z-60 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white border border-slate-200 rounded-3xl p-5 w-full max-w-sm space-y-3 shadow-xl">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
+              <h4 className="text-sm font-bold text-slate-900">Add Strap to Wardrobe</h4>
+              <button onClick={() => setShowAddStrapModal(false)} className="text-slate-400 hover:text-slate-700 text-base font-bold">
                 ✕
               </button>
             </div>
 
-            <form onSubmit={handleCreateStrap} className="space-y-2.5 text-xs">
+            <form onSubmit={handleCreateStrap} className="space-y-3 text-xs">
               <div>
-                <label className="text-[10px] text-neutral-400 font-mono-tech block mb-1">Strap Name</label>
+                <label className="text-[10px] text-slate-500 font-mono-tech font-bold block mb-1">Strap Name</label>
                 <input
                   type="text"
                   placeholder="e.g. Delugs Cognac Crazy Horse"
                   value={newStrapName}
                   onChange={(e) => setNewStrapName(e.target.value)}
-                  className="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-2 text-neutral-200"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2 text-slate-900 focus:outline-indigo-500"
                   required
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="text-[10px] text-neutral-400 font-mono-tech block mb-1">Brand / Atelier</label>
+                  <label className="text-[10px] text-slate-500 font-mono-tech font-bold block mb-1">Brand / Atelier</label>
                   <input
                     type="text"
                     placeholder="e.g. Artem Straps"
                     value={newStrapBrand}
                     onChange={(e) => setNewStrapBrand(e.target.value)}
-                    className="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-2 text-neutral-200"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2 text-slate-900 focus:outline-indigo-500"
                   />
                 </div>
                 <div>
-                  <label className="text-[10px] text-neutral-400 font-mono-tech block mb-1">Material</label>
+                  <label className="text-[10px] text-slate-500 font-mono-tech font-bold block mb-1">Material</label>
                   <select
                     value={newStrapMaterial}
                     onChange={(e) => setNewStrapMaterial(e.target.value as any)}
-                    className="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-2 text-neutral-200"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2 text-slate-900 focus:outline-indigo-500"
                   >
                     <option value="Horween Leather">Horween Leather</option>
                     <option value="NATO Nylon">NATO Nylon</option>
@@ -917,11 +960,11 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
 
               <div className="grid grid-cols-3 gap-2">
                 <div>
-                  <label className="text-[10px] text-neutral-400 font-mono-tech block mb-1">Lug Width</label>
+                  <label className="text-[10px] text-slate-500 font-mono-tech font-bold block mb-1">Lug Width</label>
                   <select
                     value={newStrapLugWidth}
                     onChange={(e) => setNewStrapLugWidth(Number(e.target.value))}
-                    className="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-2 text-neutral-200"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2 text-slate-900 focus:outline-indigo-500"
                   >
                     <option value={18}>18mm</option>
                     <option value={19}>19mm</option>
@@ -931,41 +974,41 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
                   </select>
                 </div>
                 <div>
-                  <label className="text-[10px] text-neutral-400 font-mono-tech block mb-1">Buckle (mm)</label>
+                  <label className="text-[10px] text-slate-500 font-mono-tech font-bold block mb-1">Buckle (mm)</label>
                   <input
                     type="number"
                     value={newStrapBuckleWidth}
                     onChange={(e) => setNewStrapBuckleWidth(Number(e.target.value))}
-                    className="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-2 text-neutral-200"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2 text-slate-900 focus:outline-indigo-500"
                   />
                 </div>
                 <div>
-                  <label className="text-[10px] text-neutral-400 font-mono-tech block mb-1">Price ($)</label>
+                  <label className="text-[10px] text-slate-500 font-mono-tech font-bold block mb-1">Price ($)</label>
                   <input
                     type="number"
                     value={newStrapPrice}
                     onChange={(e) => setNewStrapPrice(Number(e.target.value))}
-                    className="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-2 text-neutral-200"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2 text-slate-900 focus:outline-indigo-500"
                   />
                 </div>
               </div>
 
               <div className="flex items-center gap-4 pt-1">
-                <label className="flex items-center gap-1.5 text-[11px] text-neutral-300">
+                <label className="flex items-center gap-1.5 text-[11px] text-slate-700">
                   <input
                     type="checkbox"
                     checked={newStrapQuickRelease}
                     onChange={(e) => setNewStrapQuickRelease(e.target.checked)}
-                    className="accent-amber-500"
+                    className="accent-indigo-600"
                   />
                   <span>Quick Release</span>
                 </label>
-                <label className="flex items-center gap-1.5 text-[11px] text-neutral-300">
+                <label className="flex items-center gap-1.5 text-[11px] text-slate-700">
                   <input
                     type="checkbox"
                     checked={newStrapWaterproof}
                     onChange={(e) => setNewStrapWaterproof(e.target.checked)}
-                    className="accent-amber-500"
+                    className="accent-indigo-600"
                   />
                   <span>Waterproof</span>
                 </label>
@@ -973,7 +1016,7 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
 
               <button
                 type="submit"
-                className="w-full py-2.5 bg-amber-500 text-neutral-950 font-bold rounded-xl font-mono-tech mt-2 hover:bg-amber-400"
+                className="w-full py-2.5 bg-indigo-600 text-white font-bold rounded-xl mt-2 hover:bg-indigo-500 transition-colors shadow-sm"
               >
                 Add To Wardrobe
               </button>
@@ -984,3 +1027,4 @@ export const WatchBoxView: React.FC<WatchBoxViewProps> = ({
     </div>
   );
 };
+

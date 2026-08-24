@@ -209,15 +209,15 @@ export const WotdLogger: React.FC<WotdLoggerProps> = ({
   };
 
   return (
-    <div className="p-4 space-y-4">
+    <div className="p-4 space-y-4 text-slate-800">
       {/* Header & Quick Action */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between pt-1">
         <div>
-          <div className="flex items-center gap-1.5 text-xs text-amber-400 font-mono-tech tracking-wider uppercase">
+          <div className="flex items-center gap-1.5 text-xs text-indigo-600 font-mono-tech tracking-wider uppercase font-bold">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Wrist Time & Journal</span>
           </div>
-          <h1 className="font-serif-luxury text-xl text-neutral-100 font-bold tracking-wide mt-0.5">
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900 mt-0.5">
             Watch Rotation
           </h1>
         </div>
@@ -225,9 +225,9 @@ export const WotdLogger: React.FC<WotdLoggerProps> = ({
         <div className="flex items-center gap-1.5">
           <button
             onClick={() => setShowLogForm(!showLogForm)}
-            className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/40 text-amber-300 transition-colors text-xs font-mono-tech font-semibold"
+            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 text-indigo-600 transition-colors text-xs font-semibold shadow-2xs"
           >
-            <Plus className="w-3.5 h-3.5 text-amber-400" />
+            <Plus className="w-3.5 h-3.5" />
             <span>{showLogForm ? 'Close Log' : 'Log Wear'}</span>
           </button>
         </div>
@@ -235,15 +235,15 @@ export const WotdLogger: React.FC<WotdLoggerProps> = ({
 
       {/* TODAY'S CURRENT PIECE ON WRIST */}
       {currentWotdWatch && (
-        <div className="bg-gradient-to-br from-neutral-900 via-neutral-900/90 to-neutral-950 border border-neutral-800 rounded-3xl p-4 shadow-xl relative overflow-hidden">
+        <div className="bg-white border border-slate-200/90 rounded-3xl p-4 shadow-sm relative overflow-hidden">
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
-              <span className="font-mono-tech text-xs text-amber-400 font-bold uppercase tracking-wider">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+              <span className="font-mono-tech text-xs text-emerald-600 font-bold uppercase tracking-wider">
                 Wearing today
               </span>
             </div>
-            <span className="font-mono-tech text-[10px] text-neutral-400">
+            <span className="font-mono-tech text-[10px] text-slate-400">
               {new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
             </span>
           </div>
@@ -252,7 +252,7 @@ export const WotdLogger: React.FC<WotdLoggerProps> = ({
             {/* Live Sweeping Dial Canvas */}
             <div 
               onClick={() => onSelectWatch(currentWotdWatch)}
-              className="cursor-pointer hover:scale-105 transition-transform shrink-0"
+              className="cursor-pointer hover:scale-105 transition-transform shrink-0 p-1 bg-slate-50 rounded-2xl border border-slate-200/80 shadow-2xs"
               title="Tap to inspect watch dossier"
             >
               <WatchDialCanvas
@@ -260,29 +260,29 @@ export const WotdLogger: React.FC<WotdLoggerProps> = ({
                 model={currentWotdWatch.nickname || currentWotdWatch.model}
                 caliberType={currentWotdWatch.caliber.type}
                 vph={currentWotdWatch.caliber.frequencyVph}
-                size={88}
+                size={84}
               />
             </div>
 
             <div className="min-w-0 flex-1">
-              <span className="text-[10px] font-mono-tech text-amber-400 uppercase tracking-widest block font-semibold truncate">
+              <span className="text-[10px] font-bold text-indigo-600 font-mono-tech uppercase tracking-widest block truncate">
                 {currentWotdWatch.brand}
               </span>
               <h2 
                 onClick={() => onSelectWatch(currentWotdWatch)}
-                className="font-serif-luxury text-base font-bold text-neutral-100 truncate cursor-pointer hover:text-amber-300 transition-colors"
+                className="text-base font-bold text-slate-900 truncate cursor-pointer hover:text-indigo-600 transition-colors mt-0.5"
               >
                 {currentWotdWatch.nickname || currentWotdWatch.model}
               </h2>
               
-              <div className="flex flex-wrap items-center gap-2 mt-1 text-[11px] font-mono-tech text-neutral-400">
-                <span className="text-neutral-300">{currentWotdWatch.dimensions.caseDiameterMm}mm</span>
+              <div className="flex flex-wrap items-center gap-2 mt-1 text-[11px] font-mono-tech text-slate-500">
+                <span className="text-slate-700 font-semibold">{currentWotdWatch.dimensions.caseDiameterMm}mm</span>
                 <span>•</span>
-                <span className="text-amber-300">${Math.round(calculateWatchCostPerWear(currentWotdWatch))}/wear</span>
+                <span className="text-indigo-600 font-semibold">${Math.round(calculateWatchCostPerWear(currentWotdWatch))}/wear</span>
                 {currentMountedStrap && (
                   <>
                     <span>•</span>
-                    <span className="text-neutral-400 truncate max-w-[140px]">{currentMountedStrap.name}</span>
+                    <span className="text-slate-400 truncate max-w-[140px]">{currentMountedStrap.name}</span>
                   </>
                 )}
               </div>
@@ -292,145 +292,85 @@ export const WotdLogger: React.FC<WotdLoggerProps> = ({
       )}
 
       {/* SMART ROTATION RECOMMENDER ("What Should I Wear Today?") */}
-      <div className="bg-gradient-to-br from-neutral-900 via-neutral-900 to-neutral-950 border border-neutral-800 rounded-3xl p-4 shadow-lg space-y-3">
+      <div className="bg-white border border-slate-200/90 rounded-3xl p-4 shadow-sm space-y-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-lg bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400">
-              <Compass className="w-3.5 h-3.5" />
+            <div className="w-8 h-8 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 shadow-2xs">
+              <Compass className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="font-serif-luxury text-xs font-bold text-neutral-100">
+              <h3 className="text-sm font-bold text-slate-900">
                 Horology Concierge
               </h3>
-              <p className="text-[10px] text-neutral-400 font-mono-tech">
-                rotation recommendation
+              <p className="text-[10px] text-slate-400 font-mono-tech">
+                Smart rotation recommendation
               </p>
             </div>
           </div>
 
           <button
             onClick={() => generateRecommendation(recommendOccasion)}
-            className="flex items-center gap-1 text-[11px] font-mono-tech text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 px-2.5 py-1 rounded-xl transition-all"
+            className="flex items-center gap-1 text-xs font-semibold text-indigo-600 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 px-3 py-1.5 rounded-xl transition-all shadow-2xs"
           >
-            <Shuffle className="w-3 h-3 text-amber-400" />
+            <Shuffle className="w-3.5 h-3.5 text-indigo-600" />
             <span>Generate Pick</span>
           </button>
         </div>
 
-        {/* Occasion Filter Chips - One Word Only */}
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-[10px] font-mono-tech no-scrollbar">
-          <button
-            onClick={() => {
-              setRecommendOccasion('neglect');
-              generateRecommendation('neglect');
-            }}
-            className={`px-3 py-1 rounded-xl whitespace-nowrap transition-all ${
-              recommendOccasion === 'neglect'
-                ? 'bg-amber-500 text-neutral-950 font-bold'
-                : 'bg-neutral-950 border border-neutral-800 text-neutral-400 hover:text-neutral-200'
-            }`}
-          >
-            Neglect
-          </button>
-
-          <button
-            onClick={() => {
-              setRecommendOccasion('Daily / Office');
-              generateRecommendation('Daily / Office');
-            }}
-            className={`px-3 py-1 rounded-xl whitespace-nowrap transition-all ${
-              recommendOccasion === 'Daily / Office'
-                ? 'bg-amber-500 text-neutral-950 font-bold'
-                : 'bg-neutral-950 border border-neutral-800 text-neutral-400 hover:text-neutral-200'
-            }`}
-          >
-            Office
-          </button>
-
-          <button
-            onClick={() => {
-              setRecommendOccasion('Casual / Weekend');
-              generateRecommendation('Casual / Weekend');
-            }}
-            className={`px-3 py-1 rounded-xl whitespace-nowrap transition-all ${
-              recommendOccasion === 'Casual / Weekend'
-                ? 'bg-amber-500 text-neutral-950 font-bold'
-                : 'bg-neutral-950 border border-neutral-800 text-neutral-400 hover:text-neutral-200'
-            }`}
-          >
-            Weekend
-          </button>
-
-          <button
-            onClick={() => {
-              setRecommendOccasion('Dress / Formal');
-              generateRecommendation('Dress / Formal');
-            }}
-            className={`px-3 py-1 rounded-xl whitespace-nowrap transition-all ${
-              recommendOccasion === 'Dress / Formal'
-                ? 'bg-amber-500 text-neutral-950 font-bold'
-                : 'bg-neutral-950 border border-neutral-800 text-neutral-400 hover:text-neutral-200'
-            }`}
-          >
-            Formal
-          </button>
-
-          <button
-            onClick={() => {
-              setRecommendOccasion('Sport / Outdoor');
-              generateRecommendation('Sport / Outdoor');
-            }}
-            className={`px-3 py-1 rounded-xl whitespace-nowrap transition-all ${
-              recommendOccasion === 'Sport / Outdoor'
-                ? 'bg-amber-500 text-neutral-950 font-bold'
-                : 'bg-neutral-950 border border-neutral-800 text-neutral-400 hover:text-neutral-200'
-            }`}
-          >
-            Sport
-          </button>
-
-          <button
-            onClick={() => {
-              setRecommendOccasion('Travel');
-              generateRecommendation('Travel');
-            }}
-            className={`px-3 py-1 rounded-xl whitespace-nowrap transition-all ${
-              recommendOccasion === 'Travel'
-                ? 'bg-amber-500 text-neutral-950 font-bold'
-                : 'bg-neutral-950 border border-neutral-800 text-neutral-400 hover:text-neutral-200'
-            }`}
-          >
-            Travel
-          </button>
+        {/* Occasion Filter Chips */}
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs font-semibold no-scrollbar">
+          {[
+            { id: 'neglect', label: 'Neglect Priority' },
+            { id: 'Daily / Office', label: 'Office' },
+            { id: 'Casual / Weekend', label: 'Weekend' },
+            { id: 'Dress / Formal', label: 'Formal' },
+            { id: 'Sport / Outdoor', label: 'Sport' },
+            { id: 'Travel', label: 'Travel' },
+          ].map((item) => (
+            <button
+              key={item.id}
+              onClick={() => {
+                setRecommendOccasion(item.id as any);
+                generateRecommendation(item.id as any);
+              }}
+              className={`px-3 py-1.5 rounded-xl whitespace-nowrap transition-all text-xs ${
+                recommendOccasion === item.id
+                  ? 'bg-indigo-600 text-white font-bold shadow-2xs'
+                  : 'bg-slate-50 border border-slate-200 text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              {item.label}
+            </button>
+          ))}
         </div>
 
         {/* Recommender Result Display */}
         {recommendationResult && (
-          <div className="bg-neutral-950/80 border border-amber-500/30 rounded-2xl p-3 space-y-2.5">
+          <div className="bg-slate-50 border border-indigo-200 rounded-2xl p-3.5 space-y-2.5 shadow-2xs">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2.5">
                 <div 
                   onClick={() => onSelectWatch(recommendationResult.watch)}
-                  className="cursor-pointer hover:scale-105 transition-transform"
+                  className="cursor-pointer hover:scale-105 transition-transform bg-white rounded-xl p-1 border border-slate-200 shadow-2xs"
                 >
                   <WatchDialCanvas
                     brand={recommendationResult.watch.brand}
                     model={recommendationResult.watch.nickname || recommendationResult.watch.model}
                     caliberType={recommendationResult.watch.caliber.type}
                     vph={recommendationResult.watch.caliber.frequencyVph}
-                    size={64}
+                    size={56}
                   />
                 </div>
                 <div>
-                  <span className="text-[9px] text-amber-400 font-mono-tech uppercase block">
+                  <span className="text-[10px] text-indigo-600 font-bold uppercase block font-mono-tech">
                     Recommended Match
                   </span>
-                  <h4 className="font-serif-luxury text-sm font-bold text-neutral-100">
+                  <h4 className="text-sm font-bold text-slate-900">
                     {recommendationResult.watch.brand} {recommendationResult.watch.nickname || recommendationResult.watch.model}
                   </h4>
                   {recommendationResult.strap && (
-                    <p className="text-[10px] text-neutral-400 font-mono-tech mt-0.5">
-                      Paired with: <span className="text-amber-300">{recommendationResult.strap.name}</span>
+                    <p className="text-[10px] text-slate-500 font-mono-tech mt-0.5">
+                      Paired with: <span className="text-indigo-600 font-semibold">{recommendationResult.strap.name}</span>
                     </p>
                   )}
                 </div>
@@ -438,16 +378,16 @@ export const WotdLogger: React.FC<WotdLoggerProps> = ({
 
               <button
                 onClick={handleApplyRecommendation}
-                className="px-3 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-neutral-950 font-mono-tech text-xs font-bold transition-all shadow-md shrink-0 flex items-center gap-1"
+                className="px-3.5 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs transition-all shadow-2xs shrink-0 flex items-center gap-1"
               >
                 <Check className="w-3.5 h-3.5 stroke-[3]" />
                 <span>Wear Today</span>
               </button>
             </div>
 
-            <div className="pt-2 border-t border-neutral-800/80 text-[11px] text-neutral-300 font-sans space-y-0.5">
-              <p className="text-amber-200/90 font-medium">✦ {recommendationResult.reason}</p>
-              <p className="text-[10px] text-neutral-400 font-mono-tech">{recommendationResult.scoreExplanation}</p>
+            <div className="pt-2 border-t border-slate-200 text-xs text-slate-600 space-y-0.5">
+              <p className="text-indigo-700 font-medium">✦ {recommendationResult.reason}</p>
+              <p className="text-[11px] text-slate-500 font-mono-tech">{recommendationResult.scoreExplanation}</p>
             </div>
           </div>
         )}
@@ -455,15 +395,15 @@ export const WotdLogger: React.FC<WotdLoggerProps> = ({
 
       {/* LOG WEAR FORM (Expandable) */}
       {showLogForm && (
-        <form onSubmit={handleLogSubmit} className="bg-neutral-900 border border-neutral-800 rounded-3xl p-4 space-y-3 shadow-xl">
-          <div className="flex items-center justify-between border-b border-neutral-800 pb-2">
-            <h3 className="font-serif-luxury text-xs font-bold text-amber-300">
+        <form onSubmit={handleLogSubmit} className="bg-white border border-slate-200 rounded-3xl p-5 space-y-3 shadow-md">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
+            <h3 className="text-sm font-bold text-slate-900">
               Log Wrist Check Entry
             </h3>
             <button
               type="button"
               onClick={() => setShowLogForm(false)}
-              className="text-neutral-400 hover:text-white text-xs"
+              className="text-slate-400 hover:text-slate-700 text-sm font-bold"
             >
               ✕
             </button>
@@ -471,7 +411,7 @@ export const WotdLogger: React.FC<WotdLoggerProps> = ({
 
           <div className="grid grid-cols-2 gap-2 text-xs">
             <div>
-              <label className="text-[10px] font-mono-tech text-neutral-400 block mb-1">Timepiece</label>
+              <label className="text-[10px] font-bold text-slate-500 uppercase font-mono-tech block mb-1">Timepiece</label>
               <select
                 value={selectedWatchId}
                 onChange={(e) => {
@@ -479,7 +419,7 @@ export const WotdLogger: React.FC<WotdLoggerProps> = ({
                   const w = watches.find((watch) => watch.id === e.target.value);
                   if (w && w.currentStrapId) setSelectedStrapId(w.currentStrapId);
                 }}
-                className="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-2 text-neutral-200 text-[11px] font-mono-tech focus:outline-none focus:border-amber-500"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2 text-slate-900 text-xs focus:outline-indigo-500"
               >
                 {watches.map((w) => (
                   <option key={w.id} value={w.id}>
@@ -490,11 +430,11 @@ export const WotdLogger: React.FC<WotdLoggerProps> = ({
             </div>
 
             <div>
-              <label className="text-[10px] font-mono-tech text-neutral-400 block mb-1">Strap / Bracelet</label>
+              <label className="text-[10px] font-bold text-slate-500 uppercase font-mono-tech block mb-1">Strap / Bracelet</label>
               <select
                 value={selectedStrapId}
                 onChange={(e) => setSelectedStrapId(e.target.value)}
-                className="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-2 text-neutral-200 text-[11px] font-mono-tech focus:outline-none focus:border-amber-500"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2 text-slate-900 text-xs focus:outline-indigo-500"
               >
                 {straps.map((s) => (
                   <option key={s.id} value={s.id}>
@@ -507,11 +447,11 @@ export const WotdLogger: React.FC<WotdLoggerProps> = ({
 
           <div className="grid grid-cols-2 gap-2 text-xs">
             <div>
-              <label className="text-[10px] font-mono-tech text-neutral-400 block mb-1">Occasion</label>
+              <label className="text-[10px] font-bold text-slate-500 uppercase font-mono-tech block mb-1">Occasion</label>
               <select
                 value={selectedOccasion}
                 onChange={(e) => setSelectedOccasion(e.target.value as WearOccasion)}
-                className="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-2 text-neutral-200 text-[11px] font-mono-tech focus:outline-none focus:border-amber-500"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2 text-slate-900 text-xs focus:outline-indigo-500"
               >
                 <option value="Daily / Office">Daily / Office</option>
                 <option value="Casual / Weekend">Casual / Weekend</option>
@@ -522,8 +462,8 @@ export const WotdLogger: React.FC<WotdLoggerProps> = ({
             </div>
 
             <div>
-              <label className="text-[10px] font-mono-tech text-neutral-400 block mb-1">Satisfaction Rating</label>
-              <div className="flex items-center gap-1 bg-neutral-950 border border-neutral-800 rounded-xl p-2">
+              <label className="text-[10px] font-bold text-slate-500 uppercase font-mono-tech block mb-1">Satisfaction Rating</label>
+              <div className="flex items-center gap-1 bg-slate-50 border border-slate-200 rounded-xl p-2">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <button
                     key={star}
@@ -532,8 +472,8 @@ export const WotdLogger: React.FC<WotdLoggerProps> = ({
                     className="focus:outline-none"
                   >
                     <Star
-                      className={`w-3.5 h-3.5 ${
-                        star <= rating ? 'text-amber-400 fill-amber-400' : 'text-neutral-700'
+                      className={`w-4 h-4 ${
+                        star <= rating ? 'text-amber-400 fill-amber-400' : 'text-slate-200'
                       }`}
                     />
                   </button>
@@ -543,21 +483,21 @@ export const WotdLogger: React.FC<WotdLoggerProps> = ({
           </div>
 
           <div>
-            <label className="text-[10px] font-mono-tech text-neutral-400 block mb-1">Collector Notes</label>
+            <label className="text-[10px] font-bold text-slate-500 uppercase font-mono-tech block mb-1">Collector Notes</label>
             <input
               type="text"
-              placeholder="e.g. Adjusted glidelock 2mm for warm afternoon..."
+              placeholder="e.g. Adjusted micro-adjustment on clasp for hot afternoon..."
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              className="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-2 text-xs text-neutral-200 focus:outline-none focus:border-amber-500"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2 text-xs text-slate-900 focus:outline-indigo-500"
             />
           </div>
 
           {/* Photo Attachment Row */}
           <div className="flex items-center justify-between pt-1">
             <div className="flex items-center gap-2">
-              <label className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-neutral-950 border border-neutral-800 hover:border-amber-500/50 cursor-pointer text-[11px] font-mono-tech text-neutral-300">
-                <Camera className="w-3.5 h-3.5 text-amber-400" />
+              <label className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-indigo-300 cursor-pointer text-xs font-semibold text-slate-700 shadow-2xs">
+                <Camera className="w-3.5 h-3.5 text-indigo-600" />
                 <span>{attachedPhoto ? 'Change Photo' : 'Attach Wrist Photo'}</span>
                 <input
                   type="file"
@@ -572,12 +512,12 @@ export const WotdLogger: React.FC<WotdLoggerProps> = ({
                   <img
                     src={attachedPhoto}
                     alt="Uploaded wrist preview"
-                    className="w-8 h-8 rounded-lg object-cover border border-amber-400/50"
+                    className="w-8 h-8 rounded-lg object-cover border border-indigo-400"
                   />
                   <button
                     type="button"
                     onClick={() => setAttachedPhoto(null)}
-                    className="text-neutral-500 hover:text-neutral-300 text-xs"
+                    className="text-slate-400 hover:text-slate-600 text-xs font-bold"
                   >
                     ✕
                   </button>
@@ -587,7 +527,7 @@ export const WotdLogger: React.FC<WotdLoggerProps> = ({
 
             <button
               type="submit"
-              className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-neutral-950 font-bold font-mono-tech text-xs transition-all shadow-md"
+              className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs transition-all shadow-2xs"
             >
               Save Wear Entry
             </button>
@@ -597,15 +537,15 @@ export const WotdLogger: React.FC<WotdLoggerProps> = ({
 
       {/* NEGLECTED WATCHES ALERT */}
       {neglectedWatches.length > 0 && (
-        <div id="neglected-watches-alert" className="bg-amber-950/20 border border-amber-500/40 rounded-3xl p-4 space-y-2.5 transition-all">
+        <div id="neglected-watches-alert" className="bg-amber-50 border border-amber-200 rounded-3xl p-4 space-y-2.5 transition-all shadow-2xs">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-1.5 text-amber-400">
-              <AlertTriangle className="w-4 h-4" />
+            <div className="flex items-center gap-1.5 text-amber-800">
+              <AlertTriangle className="w-4 h-4 text-amber-600" />
               <span className="font-mono-tech text-xs font-bold uppercase">
                 Idle & Neglected Timepieces ({neglectedWatches.length})
               </span>
             </div>
-            <span className="text-[10px] text-amber-300/80 font-mono-tech">
+            <span className="text-[10px] text-amber-700 font-mono-tech font-semibold">
               &gt; 14 days without wear
             </span>
           </div>
@@ -614,7 +554,7 @@ export const WotdLogger: React.FC<WotdLoggerProps> = ({
             {neglectedWatches.map(({ watch, days, costPerWear }) => (
               <div
                 key={watch.id}
-                className="bg-neutral-900/90 border border-neutral-800 rounded-2xl p-2.5 flex items-center justify-between gap-2"
+                className="bg-white border border-amber-200/80 rounded-2xl p-2.5 flex items-center justify-between gap-2 shadow-2xs"
               >
                 <div 
                   onClick={() => onSelectWatch(watch)}
@@ -628,10 +568,10 @@ export const WotdLogger: React.FC<WotdLoggerProps> = ({
                     size={42}
                   />
                   <div className="min-w-0">
-                    <h4 className="font-medium text-xs text-neutral-100 truncate">
+                    <h4 className="font-semibold text-xs text-slate-900 truncate">
                       {watch.brand} {watch.nickname || watch.model}
                     </h4>
-                    <span className="text-[10px] text-amber-400 font-mono-tech block">
+                    <span className="text-[10px] text-amber-700 font-mono-tech block font-semibold">
                       Not worn in {days} days • ${Math.round(costPerWear)}/wear
                     </span>
                   </div>
@@ -644,10 +584,10 @@ export const WotdLogger: React.FC<WotdLoggerProps> = ({
                       particleCount: 30,
                       spread: 50,
                       origin: { y: 0.8 },
-                      colors: ['#f59e0b', '#10b981'],
+                      colors: ['#6366f1', '#10b981'],
                     });
                   }}
-                  className="px-2.5 py-1 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/40 text-amber-300 font-mono-tech text-[10px] font-semibold shrink-0"
+                  className="px-2.5 py-1 rounded-xl bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 text-indigo-600 font-mono-tech text-[10px] font-semibold shrink-0 shadow-2xs"
                 >
                   + Rotate Today
                 </button>
@@ -659,14 +599,14 @@ export const WotdLogger: React.FC<WotdLoggerProps> = ({
 
       {/* WRIST CHECK DAILY JOURNAL (Photo-First Feed) */}
       <div className="space-y-3">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between px-1">
           <div className="flex items-center gap-1.5">
-            <Calendar className="w-3.5 h-3.5 text-amber-400" />
-            <h3 className="font-serif-luxury text-sm font-bold text-neutral-100">
+            <Calendar className="w-4 h-4 text-indigo-600" />
+            <h3 className="text-sm font-bold text-slate-900">
               Wrist Check Daily Journal
             </h3>
           </div>
-          <span className="text-[10px] text-neutral-500 font-mono-tech">
+          <span className="text-[10px] text-slate-400 font-mono-tech">
             {wearLogs.length} Total Logs
           </span>
         </div>
@@ -680,7 +620,7 @@ export const WotdLogger: React.FC<WotdLoggerProps> = ({
             return (
               <div
                 key={log.id}
-                className="bg-gradient-to-b from-neutral-900 to-neutral-950 border border-neutral-800 rounded-3xl overflow-hidden shadow-lg hover:border-neutral-700 transition-all"
+                className="bg-white border border-slate-200/90 rounded-3xl overflow-hidden shadow-sm hover:border-indigo-300 transition-all"
               >
                 {/* Large Wrist Photo Preview if Present */}
                 {log.photoUrl && (
@@ -690,7 +630,7 @@ export const WotdLogger: React.FC<WotdLoggerProps> = ({
                       title: `${watch.brand} - ${watch.nickname || watch.model}`,
                       subtitle: `${log.dateStr} • ${log.occasion} • ${strap?.name || 'Standard Strap'}`
                     })}
-                    className="relative h-44 w-full bg-neutral-950 cursor-pointer group overflow-hidden"
+                    className="relative h-44 w-full bg-slate-100 cursor-pointer group overflow-hidden"
                   >
                     <img
                       src={log.photoUrl}
@@ -698,16 +638,16 @@ export const WotdLogger: React.FC<WotdLoggerProps> = ({
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       referrerPolicy="no-referrer"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-black/30 pointer-events-none" />
-                    <div className="absolute top-2.5 right-2.5 bg-black/70 backdrop-blur-xs text-white p-1.5 rounded-xl border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <Maximize2 className="w-3.5 h-3.5 text-amber-300" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
+                    <div className="absolute top-2.5 right-2.5 bg-black/60 backdrop-blur-xs text-white p-1.5 rounded-xl border border-white/20 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <Maximize2 className="w-3.5 h-3.5 text-white" />
                     </div>
                     <div className="absolute bottom-2.5 left-3 flex items-center gap-1.5">
-                      <span className="bg-neutral-950/80 backdrop-blur text-amber-300 text-[10px] font-mono-tech px-2.5 py-0.5 rounded-full border border-neutral-800">
+                      <span className="bg-white/90 backdrop-blur text-slate-800 text-[10px] font-mono-tech font-bold px-2.5 py-0.5 rounded-full border border-slate-200 shadow-2xs">
                         {log.occasion}
                       </span>
                       {strap && (
-                        <span className="bg-neutral-900/80 backdrop-blur text-neutral-300 text-[10px] font-mono-tech px-2 py-0.5 rounded-full border border-neutral-800 truncate max-w-[140px]">
+                        <span className="bg-white/90 backdrop-blur text-slate-700 text-[10px] font-mono-tech px-2 py-0.5 rounded-full border border-slate-200 truncate max-w-[140px] shadow-2xs">
                           {strap.name}
                         </span>
                       )}
@@ -721,7 +661,7 @@ export const WotdLogger: React.FC<WotdLoggerProps> = ({
                     {!log.photoUrl && (
                       <div 
                         onClick={() => onSelectWatch(watch)}
-                        className="cursor-pointer shrink-0"
+                        className="cursor-pointer shrink-0 bg-slate-50 p-1 rounded-xl border border-slate-200 shadow-2xs"
                       >
                         <WatchDialCanvas
                           brand={watch.brand}
@@ -735,29 +675,29 @@ export const WotdLogger: React.FC<WotdLoggerProps> = ({
 
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-mono-tech text-amber-400 font-semibold uppercase">
+                        <span className="text-[10px] font-mono-tech text-indigo-600 font-bold uppercase">
                           {watch.brand}
                         </span>
-                        <span className="text-[10px] text-neutral-500 font-mono-tech">
+                        <span className="text-[10px] text-slate-400 font-mono-tech">
                           {log.dateStr}
                         </span>
                       </div>
 
                       <h4 
                         onClick={() => onSelectWatch(watch)}
-                        className="font-medium text-xs text-neutral-100 cursor-pointer hover:text-amber-300 transition-colors mt-0.5"
+                        className="font-semibold text-xs text-slate-900 cursor-pointer hover:text-indigo-600 transition-colors mt-0.5"
                       >
                         {watch.nickname || watch.model}
                       </h4>
 
                       {log.notes && (
-                        <p className="text-[11px] text-neutral-400 font-sans mt-1 italic">
+                        <p className="text-[11px] text-slate-600 mt-1 italic">
                           "{log.notes}"
                         </p>
                       )}
 
                       {!log.photoUrl && strap && (
-                        <span className="text-[10px] text-neutral-500 font-mono-tech block mt-1">
+                        <span className="text-[10px] text-slate-400 font-mono-tech block mt-1">
                           Mounted on: {strap.name} ({strap.material})
                         </span>
                       )}
@@ -767,10 +707,10 @@ export const WotdLogger: React.FC<WotdLoggerProps> = ({
                   <div className="text-right shrink-0">
                     <div className="flex items-center justify-end gap-0.5">
                       {Array.from({ length: log.rating || 5 }).map((_, i) => (
-                        <Star key={i} className="w-2.5 h-2.5 text-amber-400 fill-amber-400" />
+                        <Star key={i} className="w-3 h-3 text-amber-400 fill-amber-400" />
                       ))}
                     </div>
-                    <span className="text-[9px] text-neutral-500 font-mono-tech block mt-1">
+                    <span className="text-[9px] text-slate-400 font-mono-tech block mt-1">
                       {log.occasion}
                     </span>
                   </div>
@@ -782,15 +722,15 @@ export const WotdLogger: React.FC<WotdLoggerProps> = ({
       </div>
 
       {/* REAL COST-PER-WEAR LEADERBOARD */}
-      <div className="bg-neutral-900/80 border border-neutral-800 rounded-3xl p-4 space-y-3">
+      <div className="bg-white border border-slate-200/90 rounded-3xl p-4 space-y-3 shadow-sm">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1.5 text-amber-400">
-            <TrendingUp className="w-3.5 h-3.5" />
-            <h3 className="font-serif-luxury text-xs font-bold uppercase tracking-wider text-neutral-200">
+          <div className="flex items-center gap-1.5 text-indigo-600">
+            <TrendingUp className="w-4 h-4" />
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900">
               Cost-Per-Wear Optimization
             </h3>
           </div>
-          <span className="text-[10px] text-neutral-500 font-mono-tech">Purchase Price / Total Days Worn</span>
+          <span className="text-[10px] text-slate-400 font-mono-tech">Purchase Price / Total Days Worn</span>
         </div>
 
         <div className="space-y-2">
@@ -802,25 +742,25 @@ export const WotdLogger: React.FC<WotdLoggerProps> = ({
               <div
                 key={watch.id}
                 onClick={() => onSelectWatch(watch)}
-                className="bg-neutral-950/70 border border-neutral-800/80 rounded-2xl p-2.5 flex items-center justify-between cursor-pointer hover:border-amber-500/50 transition-all text-xs"
+                className="bg-slate-50 border border-slate-200/80 rounded-2xl p-2.5 flex items-center justify-between cursor-pointer hover:border-indigo-300 transition-all text-xs"
               >
                 <div className="flex items-center gap-2.5">
-                  <span className="w-5 font-mono-tech font-bold text-neutral-500 text-[11px]">
+                  <span className="w-5 font-mono-tech font-bold text-slate-400 text-[11px]">
                     #{idx + 1}
                   </span>
                   <div>
-                    <h4 className="font-medium text-neutral-200 truncate max-w-[170px]">
+                    <h4 className="font-semibold text-slate-900 truncate max-w-[170px]">
                       {watch.brand} {watch.nickname || watch.model}
                     </h4>
-                    <span className="text-[10px] text-neutral-500 font-mono-tech">
+                    <span className="text-[10px] text-slate-500 font-mono-tech">
                       {totalWears} logged wears • ${watch.purchasePriceUsd.toLocaleString()}
                     </span>
                   </div>
                 </div>
 
                 <div className="text-right font-mono-tech">
-                  <span className="font-bold text-amber-300 text-xs">${Math.round(cpw)}</span>
-                  <span className="text-[9px] text-neutral-500 block">per wear</span>
+                  <span className="font-bold text-indigo-600 text-xs">${Math.round(cpw)}</span>
+                  <span className="text-[9px] text-slate-400 block">per wear</span>
                 </div>
               </div>
             );
@@ -832,11 +772,11 @@ export const WotdLogger: React.FC<WotdLoggerProps> = ({
       {zoomedPhoto && (
         <div 
           onClick={() => setZoomedPhoto(null)}
-          className="fixed inset-0 z-60 bg-black/90 backdrop-blur-md flex items-center justify-center p-4"
+          className="fixed inset-0 z-60 bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4"
         >
           <div 
             onClick={(e) => e.stopPropagation()}
-            className="bg-neutral-950 border border-neutral-800 rounded-3xl overflow-hidden max-w-md w-full shadow-2xl space-y-3"
+            className="bg-white border border-slate-200 rounded-3xl overflow-hidden max-w-md w-full shadow-2xl space-y-3"
           >
             <div className="relative">
               <img
@@ -847,16 +787,16 @@ export const WotdLogger: React.FC<WotdLoggerProps> = ({
               />
               <button
                 onClick={() => setZoomedPhoto(null)}
-                className="absolute top-3 right-3 p-1.5 rounded-full bg-black/70 text-white hover:bg-black transition-colors"
+                className="absolute top-3 right-3 p-1.5 rounded-full bg-slate-900/60 text-white hover:bg-slate-900 transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
             <div className="p-4 pt-1">
-              <h4 className="font-serif-luxury text-base font-bold text-neutral-100">
+              <h4 className="text-base font-bold text-slate-900">
                 {zoomedPhoto.title}
               </h4>
-              <p className="text-xs text-neutral-400 font-mono-tech mt-1">
+              <p className="text-xs text-slate-500 font-mono-tech mt-1">
                 {zoomedPhoto.subtitle}
               </p>
             </div>

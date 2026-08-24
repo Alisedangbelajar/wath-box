@@ -89,23 +89,23 @@ export const WatchGalleryModal: React.FC<WatchGalleryModalProps> = ({
               onClose();
               onOpenPhotoModal();
             }}
-            className="flex items-center gap-1 px-2.5 py-1 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/40 text-amber-300 text-xs font-mono-tech font-bold transition-all"
+            className="flex items-center gap-1 px-2.5 py-1 rounded-xl bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 text-indigo-600 text-xs font-mono-tech font-bold transition-all shadow-2xs"
           >
-            <Camera className="w-3.5 h-3.5 text-amber-400" />
+            <Camera className="w-3.5 h-3.5 text-indigo-600" />
             <span>+ Snap</span>
           </button>
         )
       }
     >
-      <div className="space-y-3.5">
+      <div className="space-y-3.5 text-slate-800">
         {/* Category Filters */}
-        <div className="flex items-center justify-between bg-neutral-900 p-1 rounded-2xl border border-neutral-800 text-[11px] font-mono-tech">
+        <div className="flex items-center justify-between bg-slate-100 p-1 rounded-2xl border border-slate-200/80 text-[11px] font-mono-tech">
           <button
             onClick={() => setGalleryFilter('all')}
             className={`flex-1 py-1.5 rounded-xl transition-all ${
               galleryFilter === 'all'
-                ? 'bg-amber-500 text-neutral-950 font-bold shadow-sm'
-                : 'text-neutral-400 hover:text-neutral-200'
+                ? 'bg-indigo-600 text-white font-bold shadow-2xs'
+                : 'text-slate-500 hover:text-slate-800'
             }`}
           >
             All Photos ({allItems.length})
@@ -114,8 +114,8 @@ export const WatchGalleryModal: React.FC<WatchGalleryModalProps> = ({
             onClick={() => setGalleryFilter('watches')}
             className={`flex-1 py-1.5 rounded-xl transition-all ${
               galleryFilter === 'watches'
-                ? 'bg-amber-500 text-neutral-950 font-bold shadow-sm'
-                : 'text-neutral-400 hover:text-neutral-200'
+                ? 'bg-indigo-600 text-white font-bold shadow-2xs'
+                : 'text-slate-500 hover:text-slate-800'
             }`}
           >
             Timepieces ({watchPhotos.length})
@@ -124,8 +124,8 @@ export const WatchGalleryModal: React.FC<WatchGalleryModalProps> = ({
             onClick={() => setGalleryFilter('wristChecks')}
             className={`flex-1 py-1.5 rounded-xl transition-all ${
               galleryFilter === 'wristChecks'
-                ? 'bg-amber-500 text-neutral-950 font-bold shadow-sm'
-                : 'text-neutral-400 hover:text-neutral-200'
+                ? 'bg-indigo-600 text-white font-bold shadow-2xs'
+                : 'text-slate-500 hover:text-slate-800'
             }`}
           >
             Wrist Checks ({wristCheckPhotos.length})
@@ -142,40 +142,40 @@ export const WatchGalleryModal: React.FC<WatchGalleryModalProps> = ({
                 <div
                   key={item.id}
                   onClick={() => setActivePhoto(item)}
-                  className="group relative rounded-2xl overflow-hidden bg-neutral-900 border border-neutral-800 hover:border-amber-500/60 cursor-pointer shadow-md transition-all flex flex-col"
+                  className="group relative rounded-2xl overflow-hidden bg-white border border-slate-200 hover:border-indigo-500/60 cursor-pointer shadow-2xs transition-all flex flex-col"
                 >
-                  <div className="relative h-36 w-full bg-neutral-950 overflow-hidden">
+                  <div className="relative h-36 w-full bg-slate-100 overflow-hidden">
                     <img
                       src={item.url}
                       alt={item.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       referrerPolicy="no-referrer"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-black/20 pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10 pointer-events-none" />
 
                     {/* Tag badge */}
                     <div className="absolute top-2 left-2">
-                      <span className="bg-black/80 backdrop-blur text-[9px] font-mono-tech px-2 py-0.5 rounded-full text-amber-300 border border-neutral-700">
+                      <span className="bg-white/90 backdrop-blur-xs text-[9px] font-mono-tech font-bold px-2 py-0.5 rounded-full text-indigo-700 border border-slate-200 shadow-2xs">
                         {item.type === 'watch' ? 'Piece Dossier' : 'Wrist Check'}
                       </span>
                     </div>
 
-                    <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity p-1 rounded-lg bg-black/70 text-white">
-                      <Maximize2 className="w-3 h-3 text-amber-300" />
+                    <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity p-1 rounded-lg bg-black/60 text-white">
+                      <Maximize2 className="w-3 h-3 text-white" />
                     </div>
                   </div>
 
-                  <div className="p-2.5 bg-neutral-900/90 flex-1 flex flex-col justify-between">
+                  <div className="p-2.5 bg-white flex-1 flex flex-col justify-between">
                     <div>
-                      <h4 className="font-serif-luxury text-xs font-bold text-neutral-100 truncate">
+                      <h4 className="font-serif-luxury text-xs font-bold text-slate-800 truncate">
                         {item.title}
                       </h4>
-                      <p className="text-[10px] text-neutral-400 font-mono-tech truncate mt-0.5">
+                      <p className="text-[10px] text-slate-500 font-mono-tech truncate mt-0.5">
                         {item.subtitle}
                       </p>
                     </div>
 
-                    <div className="flex items-center justify-between mt-2 pt-1.5 border-t border-neutral-800 text-[9px] font-mono-tech text-neutral-500">
+                    <div className="flex items-center justify-between mt-2 pt-1.5 border-t border-slate-100 text-[9px] font-mono-tech text-slate-400">
                       <span>{item.date}</span>
                       {matchedWatch && (
                         <button
@@ -185,7 +185,7 @@ export const WatchGalleryModal: React.FC<WatchGalleryModalProps> = ({
                             onClose();
                             onSelectWatch(matchedWatch);
                           }}
-                          className="text-amber-400 hover:underline flex items-center gap-0.5"
+                          className="text-indigo-600 font-bold hover:underline flex items-center gap-0.5"
                         >
                           Specs <ExternalLink className="w-2.5 h-2.5" />
                         </button>
@@ -197,11 +197,11 @@ export const WatchGalleryModal: React.FC<WatchGalleryModalProps> = ({
             })}
           </div>
         ) : (
-          <div className="text-center py-10 bg-neutral-900/50 rounded-2xl border border-neutral-800 p-6 space-y-2">
-            <Camera className="w-8 h-8 text-neutral-600 mx-auto" />
-            <p className="text-xs text-neutral-300 font-medium">No gallery photos yet</p>
-            <p className="text-[10px] text-neutral-500 font-mono-tech">
-              Upload wrist shots or snap watch photos with the + Photo button.
+          <div className="text-center py-10 bg-slate-50 rounded-2xl border border-slate-200 p-6 space-y-2">
+            <Camera className="w-8 h-8 text-slate-400 mx-auto" />
+            <p className="text-xs text-slate-700 font-medium">No gallery photos yet</p>
+            <p className="text-[10px] text-slate-400 font-mono-tech">
+              Upload wrist shots or snap watch photos with the + Snap button.
             </p>
           </div>
         )}
@@ -211,11 +211,11 @@ export const WatchGalleryModal: React.FC<WatchGalleryModalProps> = ({
       {activePhoto && (
         <div
           onClick={() => setActivePhoto(null)}
-          className="fixed inset-0 z-70 bg-black/95 backdrop-blur-md flex items-center justify-center p-4"
+          className="fixed inset-0 z-70 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4"
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="bg-neutral-950 border border-neutral-800 rounded-3xl overflow-hidden max-w-sm w-full shadow-2xl space-y-3"
+            className="bg-white border border-slate-200 rounded-3xl overflow-hidden max-w-sm w-full shadow-2xl space-y-3"
           >
             <div className="relative">
               <img
@@ -226,26 +226,26 @@ export const WatchGalleryModal: React.FC<WatchGalleryModalProps> = ({
               />
               <button
                 onClick={() => setActivePhoto(null)}
-                className="absolute top-3 right-3 p-1.5 rounded-full bg-black/70 text-white hover:bg-black transition-colors"
+                className="absolute top-3 right-3 p-1.5 rounded-full bg-black/60 text-white hover:bg-black transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
             <div className="p-4 pt-1 space-y-2">
               <div>
-                <h4 className="font-serif-luxury text-base font-bold text-neutral-100">
+                <h4 className="font-serif-luxury text-base font-bold text-slate-800">
                   {activePhoto.title}
                 </h4>
-                <p className="text-xs text-amber-300/90 font-mono-tech mt-0.5">
+                <p className="text-xs text-indigo-600 font-mono-tech font-semibold mt-0.5">
                   {activePhoto.subtitle}
                 </p>
-                <p className="text-[10px] text-neutral-500 font-mono-tech mt-0.5">
+                <p className="text-[10px] text-slate-400 font-mono-tech mt-0.5">
                   {activePhoto.date}
                 </p>
               </div>
 
               {activePhoto.watchId && (
-                <div className="pt-2 border-t border-neutral-800 flex justify-end">
+                <div className="pt-2 border-t border-slate-100 flex justify-end">
                   <button
                     onClick={() => {
                       const w = watches.find((watch) => watch.id === activePhoto.watchId);
@@ -253,7 +253,7 @@ export const WatchGalleryModal: React.FC<WatchGalleryModalProps> = ({
                       onClose();
                       if (w) onSelectWatch(w);
                     }}
-                    className="px-3 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-neutral-950 font-bold font-mono-tech text-xs transition-all flex items-center gap-1"
+                    className="px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold font-mono-tech text-xs transition-all flex items-center gap-1 shadow-2xs"
                   >
                     <Watch className="w-3 h-3" />
                     <span>Open Watch Specs</span>

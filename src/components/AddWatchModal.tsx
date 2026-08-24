@@ -269,11 +269,11 @@ export const AddWatchModal: React.FC<AddWatchModalProps> = ({
       subtitle="Input Specs, Caliber & Dimensions"
       icon={<Watch className="w-4 h-4" />}
     >
-      <form onSubmit={handleSubmit} className="space-y-3.5 text-xs">
+      <form onSubmit={handleSubmit} className="space-y-3.5 text-xs text-slate-800">
         {/* Basic Brand & Model */}
         <div className="grid grid-cols-2 gap-2">
           <div>
-            <label className="text-[10px] font-mono-tech text-neutral-400 block mb-1">
+            <label className="text-[10px] font-mono-tech text-slate-500 font-bold block mb-1">
               Brand / Manufacturer *
             </label>
             <input
@@ -281,13 +281,13 @@ export const AddWatchModal: React.FC<AddWatchModalProps> = ({
               placeholder="e.g. Seiko, Casio, Omega"
               value={brand}
               onChange={(e) => setBrand(e.target.value)}
-              className="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2 text-neutral-200 focus:outline-none focus:border-amber-500"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2 text-slate-800 focus:outline-indigo-500 shadow-2xs"
               required
             />
           </div>
 
           <div>
-            <label className="text-[10px] font-mono-tech text-neutral-400 block mb-1">
+            <label className="text-[10px] font-mono-tech text-slate-500 font-bold block mb-1">
               Model / Line *
             </label>
             <input
@@ -295,7 +295,7 @@ export const AddWatchModal: React.FC<AddWatchModalProps> = ({
               placeholder="e.g. SKX007, F-91W, Speedmaster"
               value={model}
               onChange={(e) => setModel(e.target.value)}
-              className="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2 text-neutral-200 focus:outline-none focus:border-amber-500"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2 text-slate-800 focus:outline-indigo-500 shadow-2xs"
               required
             />
           </div>
@@ -303,7 +303,7 @@ export const AddWatchModal: React.FC<AddWatchModalProps> = ({
 
         <div className="grid grid-cols-2 gap-2">
           <div>
-            <label className="text-[10px] font-mono-tech text-neutral-400 block mb-1">
+            <label className="text-[10px] font-mono-tech text-slate-500 font-bold block mb-1">
               Collector Nickname
             </label>
             <input
@@ -311,12 +311,12 @@ export const AddWatchModal: React.FC<AddWatchModalProps> = ({
               placeholder="e.g. Moonwatch, Captain Willard"
               value={nickname}
               onChange={(e) => setNickname(e.target.value)}
-              className="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2 text-neutral-200 focus:outline-none focus:border-amber-500"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2 text-slate-800 focus:outline-indigo-500 shadow-2xs"
             />
           </div>
 
           <div>
-            <label className="text-[10px] font-mono-tech text-neutral-400 block mb-1">
+            <label className="text-[10px] font-mono-tech text-slate-500 font-bold block mb-1">
               Reference Number
             </label>
             <input
@@ -324,26 +324,26 @@ export const AddWatchModal: React.FC<AddWatchModalProps> = ({
               placeholder="e.g. 310.30.42.50.01.002"
               value={referenceNumber}
               onChange={(e) => setReferenceNumber(e.target.value)}
-              className="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2 text-neutral-200 focus:outline-none focus:border-amber-500"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2 text-slate-800 focus:outline-indigo-500 shadow-2xs"
             />
           </div>
         </div>
 
         {/* Caliber Engine Selection */}
-        <div className="bg-neutral-900/80 border border-neutral-800 rounded-2xl p-3 space-y-2">
-          <div className="flex items-center gap-1.5 text-amber-400 font-mono-tech text-[11px]">
+        <div className="bg-slate-50 border border-slate-200/90 rounded-2xl p-3 space-y-2 shadow-2xs">
+          <div className="flex items-center gap-1.5 text-indigo-600 font-mono-tech text-[11px]">
             <Wrench className="w-3.5 h-3.5" />
             <span className="font-bold">Movement & Caliber Architecture</span>
           </div>
 
           <div>
-            <label className="text-[10px] font-mono-tech text-neutral-400 block mb-1">
+            <label className="text-[10px] font-mono-tech text-slate-500 font-bold block mb-1">
               Engine Preset / Architecture
             </label>
             <select
               value={selectedTemplateKey}
               onChange={(e) => handleTemplateChange(e.target.value)}
-              className="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-2 text-neutral-200 text-xs focus:outline-none focus:border-amber-500"
+              className="w-full bg-white border border-slate-200 rounded-xl p-2 text-slate-800 text-xs focus:outline-indigo-500 shadow-2xs"
             >
               {Object.keys(CALIBER_TEMPLATES).map((k) => (
                 <option key={k} value={k}>
@@ -357,50 +357,50 @@ export const AddWatchModal: React.FC<AddWatchModalProps> = ({
         </div>
 
         {/* Case Dimensions */}
-        <div className="bg-neutral-900/80 border border-neutral-800 rounded-2xl p-3 space-y-2">
-          <span className="text-[10px] font-mono-tech text-amber-400 uppercase font-bold block">
+        <div className="bg-slate-50 border border-slate-200/90 rounded-2xl p-3 space-y-2 shadow-2xs">
+          <span className="text-[10px] font-mono-tech text-indigo-600 uppercase font-bold block">
             Case Dimensions (mm)
           </span>
 
           <div className="grid grid-cols-4 gap-2">
             <div>
-              <label className="text-[9px] font-mono-tech text-neutral-500 block">Diameter</label>
+              <label className="text-[9px] font-mono-tech text-slate-400 block font-semibold">Diameter</label>
               <input
                 type="number"
                 step="0.5"
                 value={caseDiameter}
                 onChange={(e) => setCaseDiameter(Number(e.target.value))}
-                className="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-1.5 text-neutral-200 text-center font-mono-tech"
+                className="w-full bg-white border border-slate-200 rounded-xl p-1.5 text-slate-800 text-center font-mono-tech shadow-2xs"
               />
             </div>
             <div>
-              <label className="text-[9px] font-mono-tech text-neutral-500 block">Thickness</label>
+              <label className="text-[9px] font-mono-tech text-slate-400 block font-semibold">Thickness</label>
               <input
                 type="number"
                 step="0.5"
                 value={thickness}
                 onChange={(e) => setThickness(Number(e.target.value))}
-                className="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-1.5 text-neutral-200 text-center font-mono-tech"
+                className="w-full bg-white border border-slate-200 rounded-xl p-1.5 text-slate-800 text-center font-mono-tech shadow-2xs"
               />
             </div>
             <div>
-              <label className="text-[9px] font-mono-tech text-neutral-500 block">Lug-to-Lug</label>
+              <label className="text-[9px] font-mono-tech text-slate-400 block font-semibold">Lug-to-Lug</label>
               <input
                 type="number"
                 step="0.5"
                 value={lugToLug}
                 onChange={(e) => setLugToLug(Number(e.target.value))}
-                className="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-1.5 text-neutral-200 text-center font-mono-tech"
+                className="w-full bg-white border border-slate-200 rounded-xl p-1.5 text-slate-800 text-center font-mono-tech shadow-2xs"
               />
             </div>
             <div>
-              <label className="text-[9px] font-mono-tech text-neutral-500 block">Lug Width</label>
+              <label className="text-[9px] font-mono-tech text-slate-400 block font-semibold">Lug Width</label>
               <input
                 type="number"
                 step="1"
                 value={lugWidth}
                 onChange={(e) => setLugWidth(Number(e.target.value))}
-                className="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-1.5 text-amber-300 text-center font-mono-tech font-bold"
+                className="w-full bg-white border border-slate-200 rounded-xl p-1.5 text-indigo-600 text-center font-mono-tech font-bold shadow-2xs"
               />
             </div>
           </div>
@@ -409,7 +409,7 @@ export const AddWatchModal: React.FC<AddWatchModalProps> = ({
         {/* Valuation & Provenance */}
         <div className="grid grid-cols-2 gap-2 font-mono-tech">
           <div>
-            <label className="text-[10px] text-neutral-400 block mb-1">Purchase Price ($)</label>
+            <label className="text-[10px] text-slate-500 font-bold block mb-1">Purchase Price ($)</label>
             <input
               type="number"
               value={purchasePrice}
@@ -418,24 +418,24 @@ export const AddWatchModal: React.FC<AddWatchModalProps> = ({
                 setPurchasePrice(val);
                 setMarketValue(val);
               }}
-              className="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2 text-neutral-200"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2 text-slate-800 shadow-2xs"
             />
           </div>
 
           <div>
-            <label className="text-[10px] text-neutral-400 block mb-1">Estimated Valuation ($)</label>
+            <label className="text-[10px] text-slate-500 font-bold block mb-1">Estimated Valuation ($)</label>
             <input
               type="number"
               value={marketValue}
               onChange={(e) => setMarketValue(Number(e.target.value))}
-              className="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2 text-amber-300 font-bold"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2 text-indigo-600 font-bold shadow-2xs"
             />
           </div>
         </div>
 
         <button
           type="submit"
-          className="w-full py-3 rounded-2xl bg-amber-500 hover:bg-amber-400 text-neutral-950 font-bold font-mono-tech text-xs tracking-wider transition-all shadow-lg mt-2"
+          className="w-full py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold font-mono-tech text-xs tracking-wider transition-all shadow-md mt-2"
         >
           Add Timepiece To Collection Box
         </button>

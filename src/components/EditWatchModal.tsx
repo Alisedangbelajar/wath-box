@@ -97,31 +97,31 @@ export const EditWatchModal: React.FC<EditWatchModalProps> = ({
       subtitle="Update Timepiece Specifications & Provenance"
       icon={<Watch className="w-4 h-4" />}
     >
-      <form onSubmit={handleSubmit} className="space-y-3.5 text-xs">
+      <form onSubmit={handleSubmit} className="space-y-3.5 text-xs text-slate-800">
         {/* Basic Brand & Model */}
         <div className="grid grid-cols-2 gap-2">
           <div>
-            <label className="text-[10px] font-mono-tech text-neutral-400 block mb-1">
+            <label className="text-[10px] font-mono-tech text-slate-500 font-bold block mb-1">
               Brand / Manufacturer *
             </label>
             <input
               type="text"
               value={brand}
               onChange={(e) => setBrand(e.target.value)}
-              className="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2 text-neutral-200 focus:outline-none focus:border-amber-500"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2 text-slate-800 focus:outline-indigo-500 shadow-2xs"
               required
             />
           </div>
 
           <div>
-            <label className="text-[10px] font-mono-tech text-neutral-400 block mb-1">
+            <label className="text-[10px] font-mono-tech text-slate-500 font-bold block mb-1">
               Model / Line *
             </label>
             <input
               type="text"
               value={model}
               onChange={(e) => setModel(e.target.value)}
-              className="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2 text-neutral-200 focus:outline-none focus:border-amber-500"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2 text-slate-800 focus:outline-indigo-500 shadow-2xs"
               required
             />
           </div>
@@ -129,49 +129,49 @@ export const EditWatchModal: React.FC<EditWatchModalProps> = ({
 
         <div className="grid grid-cols-2 gap-2">
           <div>
-            <label className="text-[10px] font-mono-tech text-neutral-400 block mb-1">
+            <label className="text-[10px] font-mono-tech text-slate-500 font-bold block mb-1">
               Collector Nickname
             </label>
             <input
               type="text"
               value={nickname}
               onChange={(e) => setNickname(e.target.value)}
-              className="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2 text-neutral-200 focus:outline-none focus:border-amber-500"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2 text-slate-800 focus:outline-indigo-500 shadow-2xs"
             />
           </div>
 
           <div>
-            <label className="text-[10px] font-mono-tech text-neutral-400 block mb-1">
+            <label className="text-[10px] font-mono-tech text-slate-500 font-bold block mb-1">
               Reference Number
             </label>
             <input
               type="text"
               value={referenceNumber}
               onChange={(e) => setReferenceNumber(e.target.value)}
-              className="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2 text-neutral-200 focus:outline-none focus:border-amber-500"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2 text-slate-800 focus:outline-indigo-500 shadow-2xs"
             />
           </div>
         </div>
 
         {/* Caliber & Movement Engine */}
-        <div className="bg-neutral-900/80 border border-neutral-800 rounded-2xl p-3 space-y-2">
-          <div className="flex items-center gap-1.5 text-amber-400 font-mono-tech text-[11px]">
+        <div className="bg-slate-50 border border-slate-200/90 rounded-2xl p-3 space-y-2 shadow-2xs">
+          <div className="flex items-center gap-1.5 text-indigo-600 font-mono-tech text-[11px]">
             <Wrench className="w-3.5 h-3.5" />
             <span className="font-bold">Movement & Caliber Specifications</span>
           </div>
 
           <div className="grid grid-cols-2 gap-2">
             <div>
-              <label className="text-[9px] font-mono-tech text-neutral-400 block mb-1">Caliber Name</label>
+              <label className="text-[9px] font-mono-tech text-slate-500 font-bold block mb-1">Caliber Name</label>
               <input
                 type="text"
                 value={caliberName}
                 onChange={(e) => setCaliberName(e.target.value)}
-                className="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-1.5 text-neutral-200 text-xs"
+                className="w-full bg-white border border-slate-200 rounded-xl p-1.5 text-slate-800 text-xs shadow-2xs"
               />
             </div>
             <div>
-              <label className="text-[9px] font-mono-tech text-neutral-400 block mb-1">Movement Type</label>
+              <label className="text-[9px] font-mono-tech text-slate-500 font-bold block mb-1">Movement Type</label>
               <select
                 value={caliberType}
                 onChange={(e) => {
@@ -183,7 +183,7 @@ export const EditWatchModal: React.FC<EditWatchModalProps> = ({
                     if (frequencyVph === 32768 || frequencyVph === 0) setFrequencyVph(21600);
                   }
                 }}
-                className="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-1.5 text-neutral-200 text-xs"
+                className="w-full bg-white border border-slate-200 rounded-xl p-1.5 text-slate-800 text-xs shadow-2xs"
               >
                 <option value="Automatic">Automatic</option>
                 <option value="Manual Wind">Manual Wind</option>
@@ -197,80 +197,80 @@ export const EditWatchModal: React.FC<EditWatchModalProps> = ({
 
           <div className="grid grid-cols-3 gap-2">
             <div>
-              <label className="text-[9px] font-mono-tech text-neutral-500 block">Frequency (vph)</label>
+              <label className="text-[9px] font-mono-tech text-slate-400 block font-semibold">Frequency (vph)</label>
               <input
                 type="number"
                 value={frequencyVph}
                 onChange={(e) => setFrequencyVph(Number(e.target.value))}
-                className="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-1.5 text-neutral-200 text-center font-mono-tech text-xs"
+                className="w-full bg-white border border-slate-200 rounded-xl p-1.5 text-slate-800 text-center font-mono-tech text-xs shadow-2xs"
               />
             </div>
             <div>
-              <label className="text-[9px] font-mono-tech text-neutral-500 block">Reserve (Hours)</label>
+              <label className="text-[9px] font-mono-tech text-slate-400 block font-semibold">Reserve (Hours)</label>
               <input
                 type="number"
                 value={powerReserveHours}
                 onChange={(e) => setPowerReserveHours(Number(e.target.value))}
-                className="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-1.5 text-neutral-200 text-center font-mono-tech text-xs"
+                className="w-full bg-white border border-slate-200 rounded-xl p-1.5 text-slate-800 text-center font-mono-tech text-xs shadow-2xs"
               />
             </div>
             <div>
-              <label className="text-[9px] font-mono-tech text-neutral-500 block">Jewels</label>
+              <label className="text-[9px] font-mono-tech text-slate-400 block font-semibold">Jewels</label>
               <input
                 type="number"
                 value={jewels}
                 onChange={(e) => setJewels(Number(e.target.value))}
-                className="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-1.5 text-neutral-200 text-center font-mono-tech text-xs"
+                className="w-full bg-white border border-slate-200 rounded-xl p-1.5 text-slate-800 text-center font-mono-tech text-xs shadow-2xs"
               />
             </div>
           </div>
         </div>
 
         {/* Case Dimensions */}
-        <div className="bg-neutral-900/80 border border-neutral-800 rounded-2xl p-3 space-y-2">
-          <span className="text-[10px] font-mono-tech text-amber-400 uppercase font-bold block">
+        <div className="bg-slate-50 border border-slate-200/90 rounded-2xl p-3 space-y-2 shadow-2xs">
+          <span className="text-[10px] font-mono-tech text-indigo-600 uppercase font-bold block">
             Case Dimensions (mm)
           </span>
 
           <div className="grid grid-cols-4 gap-2">
             <div>
-              <label className="text-[9px] font-mono-tech text-neutral-500 block">Diameter</label>
+              <label className="text-[9px] font-mono-tech text-slate-400 block font-semibold">Diameter</label>
               <input
                 type="number"
                 step="0.5"
                 value={caseDiameter}
                 onChange={(e) => setCaseDiameter(Number(e.target.value))}
-                className="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-1.5 text-neutral-200 text-center font-mono-tech"
+                className="w-full bg-white border border-slate-200 rounded-xl p-1.5 text-slate-800 text-center font-mono-tech shadow-2xs"
               />
             </div>
             <div>
-              <label className="text-[9px] font-mono-tech text-neutral-500 block">Thickness</label>
+              <label className="text-[9px] font-mono-tech text-slate-400 block font-semibold">Thickness</label>
               <input
                 type="number"
                 step="0.5"
                 value={thickness}
                 onChange={(e) => setThickness(Number(e.target.value))}
-                className="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-1.5 text-neutral-200 text-center font-mono-tech"
+                className="w-full bg-white border border-slate-200 rounded-xl p-1.5 text-slate-800 text-center font-mono-tech shadow-2xs"
               />
             </div>
             <div>
-              <label className="text-[9px] font-mono-tech text-neutral-500 block">Lug-to-Lug</label>
+              <label className="text-[9px] font-mono-tech text-slate-400 block font-semibold">Lug-to-Lug</label>
               <input
                 type="number"
                 step="0.5"
                 value={lugToLug}
                 onChange={(e) => setLugToLug(Number(e.target.value))}
-                className="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-1.5 text-neutral-200 text-center font-mono-tech"
+                className="w-full bg-white border border-slate-200 rounded-xl p-1.5 text-slate-800 text-center font-mono-tech shadow-2xs"
               />
             </div>
             <div>
-              <label className="text-[9px] font-mono-tech text-neutral-500 block">Lug Width</label>
+              <label className="text-[9px] font-mono-tech text-slate-400 block font-semibold">Lug Width</label>
               <input
                 type="number"
                 step="1"
                 value={lugWidth}
                 onChange={(e) => setLugWidth(Number(e.target.value))}
-                className="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-1.5 text-amber-300 text-center font-mono-tech font-bold"
+                className="w-full bg-white border border-slate-200 rounded-xl p-1.5 text-indigo-600 text-center font-mono-tech font-bold shadow-2xs"
               />
             </div>
           </div>
@@ -279,30 +279,30 @@ export const EditWatchModal: React.FC<EditWatchModalProps> = ({
         {/* Valuation & Specs */}
         <div className="grid grid-cols-3 gap-2 font-mono-tech">
           <div>
-            <label className="text-[9px] text-neutral-400 block mb-1">Purchase ($)</label>
+            <label className="text-[9px] text-slate-400 block mb-1 font-semibold">Purchase ($)</label>
             <input
               type="number"
               value={purchasePrice}
               onChange={(e) => setPurchasePrice(Number(e.target.value))}
-              className="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2 text-neutral-200"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2 text-slate-800 shadow-2xs"
             />
           </div>
           <div>
-            <label className="text-[9px] text-neutral-400 block mb-1">Valuation ($)</label>
+            <label className="text-[9px] text-slate-400 block mb-1 font-semibold">Valuation ($)</label>
             <input
               type="number"
               value={marketValue}
               onChange={(e) => setMarketValue(Number(e.target.value))}
-              className="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2 text-amber-300 font-bold"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2 text-indigo-600 font-bold shadow-2xs"
             />
           </div>
           <div>
-            <label className="text-[9px] text-neutral-400 block mb-1">WR (Meters)</label>
+            <label className="text-[9px] text-slate-400 block mb-1 font-semibold">WR (Meters)</label>
             <input
               type="number"
               value={waterResistance}
               onChange={(e) => setWaterResistance(Number(e.target.value))}
-              className="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2 text-neutral-200"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2 text-slate-800 shadow-2xs"
             />
           </div>
         </div>
@@ -310,20 +310,20 @@ export const EditWatchModal: React.FC<EditWatchModalProps> = ({
         {/* Photo URL / Dial Description */}
         <div className="grid grid-cols-2 gap-2">
           <div>
-            <label className="text-[10px] font-mono-tech text-neutral-400 block mb-1">Dial Finish</label>
+            <label className="text-[10px] font-mono-tech text-slate-500 font-bold block mb-1">Dial Finish</label>
             <input
               type="text"
               value={dialColor}
               onChange={(e) => setDialColor(e.target.value)}
-              className="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2 text-neutral-200"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2 text-slate-800 shadow-2xs"
             />
           </div>
           <div>
-            <label className="text-[10px] font-mono-tech text-neutral-400 block mb-1">Box & Papers</label>
+            <label className="text-[10px] font-mono-tech text-slate-500 font-bold block mb-1">Box & Papers</label>
             <select
               value={boxAndPapers}
               onChange={(e) => setBoxAndPapers(e.target.value as BoxPapersStatus)}
-              className="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2 text-neutral-200"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2 text-slate-800 shadow-2xs"
             >
               <option value="Full Set (Box & Papers)">Full Set (Box & Papers)</option>
               <option value="Box Only">Box Only</option>
@@ -339,7 +339,7 @@ export const EditWatchModal: React.FC<EditWatchModalProps> = ({
             <button
               type="button"
               onClick={() => setConfirmDelete(true)}
-              className="px-3 py-2.5 rounded-xl bg-red-950/60 hover:bg-red-900/80 border border-red-800/60 text-red-300 font-mono-tech text-xs transition-colors flex items-center gap-1 shrink-0"
+              className="px-3.5 py-2.5 rounded-xl bg-rose-50 hover:bg-rose-100 border border-rose-200 text-rose-600 font-mono-tech text-xs transition-colors flex items-center gap-1 shrink-0 shadow-2xs"
               title="Delete Watch"
             >
               <Trash2 className="w-3.5 h-3.5" />
@@ -351,14 +351,14 @@ export const EditWatchModal: React.FC<EditWatchModalProps> = ({
               <button
                 type="button"
                 onClick={handleDelete}
-                className="px-3 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-mono-tech text-xs font-bold transition-all shadow-md"
+                className="px-3.5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-mono-tech text-xs font-bold transition-all shadow-md"
               >
                 Confirm Delete
               </button>
               <button
                 type="button"
                 onClick={() => setConfirmDelete(false)}
-                className="px-2 py-2.5 rounded-xl bg-neutral-800 text-neutral-300 text-xs"
+                className="px-2.5 py-2.5 rounded-xl bg-slate-200 text-slate-700 text-xs font-semibold"
               >
                 Cancel
               </button>
@@ -367,7 +367,7 @@ export const EditWatchModal: React.FC<EditWatchModalProps> = ({
 
           <button
             type="submit"
-            className="flex-1 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-neutral-950 font-bold font-mono-tech text-xs tracking-wider transition-all shadow-lg"
+            className="flex-1 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold font-mono-tech text-xs tracking-wider transition-all shadow-md"
           >
             Save Changes
           </button>

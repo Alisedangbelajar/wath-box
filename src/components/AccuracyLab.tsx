@@ -91,26 +91,26 @@ export const AccuracyLab: React.FC<AccuracyLabProps> = ({
   ];
 
   return (
-    <div className="p-4 space-y-4">
+    <div className="p-4 space-y-4 text-slate-800">
       {/* Top Atomic & METAS Sync Reference Header */}
-      <div className="bg-neutral-900/90 border border-neutral-800 rounded-3xl p-4 shadow-xl relative overflow-hidden space-y-3">
+      <div className="bg-white border border-slate-200/90 rounded-3xl p-4 shadow-sm relative overflow-hidden space-y-3">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1.5 text-xs text-amber-400 font-mono-tech uppercase font-bold">
-            <Radio className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
+          <div className="flex items-center gap-1.5 text-xs text-indigo-600 font-mono-tech uppercase font-bold">
+            <Radio className="w-3.5 h-3.5 text-emerald-500 animate-pulse" />
             <span>METAS & NIST Atomic Sync</span>
           </div>
-          <span className="text-[10px] text-emerald-400 font-mono-tech bg-emerald-950/80 border border-emerald-800/60 px-2.5 py-0.5 rounded-full font-semibold">
+          <span className="text-[10px] text-emerald-700 font-mono-tech bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full font-semibold shadow-2xs">
             Stratum-1 Locked
           </span>
         </div>
 
         {/* Live Millisecond Atomic Clock Display */}
-        <div className="bg-neutral-950 p-3.5 rounded-2xl border border-neutral-800/90 text-center font-mono-tech shadow-inner">
-          <div className="text-2xl sm:text-3xl font-bold tracking-widest text-neutral-100 font-mono-tech">
+        <div className="bg-slate-900 text-white p-4 rounded-2xl border border-slate-800 text-center font-mono-tech shadow-inner">
+          <div className="text-2xl sm:text-3xl font-bold tracking-widest text-white font-mono-tech">
             {atomicTime || '00:00:00.000 UTC'}
           </div>
-          <div className="text-[10px] text-neutral-400 mt-1 flex items-center justify-center gap-2">
-            <span className="text-amber-300 font-semibold">METAS Swiss Master (0 to +5 s/d)</span>
+          <div className="text-[10px] text-slate-400 mt-1 flex items-center justify-center gap-2">
+            <span className="text-indigo-300 font-semibold">METAS Swiss Master (0 to +5 s/d)</span>
             <span>•</span>
             <span>Ref: time.nist.gov</span>
           </div>
@@ -119,7 +119,7 @@ export const AccuracyLab: React.FC<AccuracyLabProps> = ({
 
       {/* Select Target Watch */}
       <div className="space-y-1.5">
-        <label className="text-[11px] text-neutral-400 font-mono-tech uppercase block">
+        <label className="text-[11px] text-slate-500 font-mono-tech uppercase font-bold block">
           Select Timepiece For Calibration:
         </label>
         <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
@@ -135,14 +135,14 @@ export const AccuracyLab: React.FC<AccuracyLabProps> = ({
                     setIsAudioRunning(false);
                   }
                 }}
-                className={`flex items-center gap-2 px-3 py-2 rounded-xl border shrink-0 transition-all text-xs ${
+                className={`flex items-center gap-2 px-3.5 py-2 rounded-xl border shrink-0 transition-all text-xs ${
                   isSelected
-                    ? 'bg-amber-500/20 border-amber-500/80 text-amber-200'
-                    : 'bg-neutral-900 border-neutral-800 text-neutral-400 hover:text-neutral-200'
+                    ? 'bg-indigo-50 border-indigo-300 text-indigo-700 font-bold shadow-2xs'
+                    : 'bg-white border-slate-200 text-slate-600 hover:text-slate-900'
                 }`}
               >
                 <span className="font-semibold">{w.brand}</span>
-                <span className="text-neutral-500 text-[11px] truncate max-w-[90px]">{w.model}</span>
+                <span className="text-slate-400 text-[11px] truncate max-w-[90px]">{w.model}</span>
               </button>
             );
           })}
@@ -152,13 +152,13 @@ export const AccuracyLab: React.FC<AccuracyLabProps> = ({
       {selectedWatch && (
         <>
           {/* Active Watch Horology Spec Card */}
-          <div className="bg-neutral-900/80 rounded-2xl border border-neutral-800 p-4 space-y-3">
+          <div className="bg-white rounded-3xl border border-slate-200/90 p-4 space-y-3 shadow-sm">
             <div className="flex items-center justify-between">
               <div>
-                <span className="text-[10px] font-mono-tech text-amber-400 uppercase tracking-wide">
+                <span className="text-[10px] font-mono-tech text-indigo-600 font-bold uppercase tracking-wide">
                   {selectedWatch.brand}
                 </span>
-                <h3 className="font-serif-luxury text-base font-bold text-neutral-100">
+                <h3 className="text-base font-bold text-slate-900">
                   {selectedWatch.caliber.name}
                 </h3>
               </div>
@@ -167,10 +167,10 @@ export const AccuracyLab: React.FC<AccuracyLabProps> = ({
               {selectedWatch.caliber.frequencyVph > 0 && (
                 <button
                   onClick={handleToggleAcoustic}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-mono-tech transition-all ${
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-mono-tech transition-all shadow-2xs ${
                     isAudioRunning
-                      ? 'bg-amber-500 text-neutral-950 font-bold border-amber-400 animate-pulse'
-                      : 'bg-neutral-800 text-neutral-300 border-neutral-700 hover:bg-neutral-700'
+                      ? 'bg-indigo-600 text-white font-bold border-indigo-500 animate-pulse'
+                      : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
                   }`}
                 >
                   {isAudioRunning ? <Volume2 className="w-3.5 h-3.5" /> : <VolumeX className="w-3.5 h-3.5" />}
@@ -180,19 +180,19 @@ export const AccuracyLab: React.FC<AccuracyLabProps> = ({
             </div>
 
             <div className="grid grid-cols-3 gap-2 text-center text-xs font-mono-tech">
-              <div className="bg-neutral-950 p-2 rounded-xl border border-neutral-800/80">
-                <span className="text-[9px] text-neutral-500 block">FREQUENCY</span>
-                <span className="font-bold text-amber-300">
+              <div className="bg-slate-50 p-2 rounded-xl border border-slate-200/80">
+                <span className="text-[9px] text-slate-400 font-bold block">FREQUENCY</span>
+                <span className="font-bold text-indigo-600">
                   {selectedWatch.caliber.frequencyVph > 0 ? `${selectedWatch.caliber.frequencyVph / 1000}k vph` : 'Glide'}
                 </span>
               </div>
-              <div className="bg-neutral-950 p-2 rounded-xl border border-neutral-800/80">
-                <span className="text-[9px] text-neutral-500 block">RESERVE</span>
-                <span className="font-bold text-neutral-200">{selectedWatch.caliber.powerReserveHours}h</span>
+              <div className="bg-slate-50 p-2 rounded-xl border border-slate-200/80">
+                <span className="text-[9px] text-slate-400 font-bold block">RESERVE</span>
+                <span className="font-bold text-slate-800">{selectedWatch.caliber.powerReserveHours}h</span>
               </div>
-              <div className="bg-neutral-950 p-2 rounded-xl border border-neutral-800/80">
-                <span className="text-[9px] text-neutral-500 block">STANDARD</span>
-                <span className="text-[10px] font-bold text-emerald-400 truncate block">
+              <div className="bg-slate-50 p-2 rounded-xl border border-slate-200/80">
+                <span className="text-[9px] text-slate-400 font-bold block">STANDARD</span>
+                <span className="text-[10px] font-bold text-emerald-600 truncate block">
                   {selectedWatch.caliber.certification?.split(' ')[0] || 'COSC'}
                 </span>
               </div>
@@ -200,13 +200,13 @@ export const AccuracyLab: React.FC<AccuracyLabProps> = ({
           </div>
 
           {/* Positional 6-Point Test Lab Simulator */}
-          <div className="bg-neutral-900/80 rounded-2xl border border-neutral-800 p-4 space-y-3">
+          <div className="bg-white rounded-3xl border border-slate-200/90 p-4 space-y-3 shadow-sm">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-1.5 text-xs text-amber-400 font-mono-tech uppercase">
-                <Activity className="w-3.5 h-3.5 text-amber-400" />
+              <div className="flex items-center gap-1.5 text-xs text-indigo-600 font-mono-tech uppercase font-bold">
+                <Activity className="w-3.5 h-3.5 text-indigo-600" />
                 <span>Positional Rate Deviation Lab</span>
               </div>
-              <span className="text-[10px] text-neutral-500 font-mono-tech">6 Positions</span>
+              <span className="text-[10px] text-slate-400 font-mono-tech">6 Positions</span>
             </div>
 
             {/* Position Select Buttons */}
@@ -219,20 +219,20 @@ export const AccuracyLab: React.FC<AccuracyLabProps> = ({
                   <button
                     key={pos}
                     onClick={() => setActiveTestPosition(pos)}
-                    className={`p-2 rounded-xl border text-left flex flex-col justify-between transition-all ${
+                    className={`p-2.5 rounded-xl border text-left flex flex-col justify-between transition-all ${
                       isCurrent
-                        ? 'bg-amber-500/20 border-amber-500/80 text-amber-200 shadow-md'
-                        : 'bg-neutral-950 border-neutral-800/80 text-neutral-400 hover:text-neutral-200'
+                        ? 'bg-indigo-50 border-indigo-300 text-indigo-700 shadow-2xs font-bold'
+                        : 'bg-slate-50 border-slate-200 text-slate-600 hover:text-slate-900'
                     }`}
                   >
                     <span className="font-bold text-[10px]">{pos.split(' ')[0]}</span>
-                    <span className="text-[8px] text-neutral-500 truncate">{pos.split(' ')[1]}</span>
+                    <span className="text-[8px] text-slate-400 truncate">{pos.split(' ')[1]}</span>
                     {existingLog ? (
-                      <span className={`text-[10px] font-bold mt-1 ${existingLog.deviationSecPerDay >= 0 ? 'text-emerald-400' : 'text-amber-400'}`}>
+                      <span className={`text-[10px] font-bold mt-1 ${existingLog.deviationSecPerDay >= 0 ? 'text-emerald-600' : 'text-amber-600'}`}>
                         {existingLog.deviationSecPerDay > 0 ? `+${existingLog.deviationSecPerDay}` : existingLog.deviationSecPerDay} s/d
                       </span>
                     ) : (
-                      <span className="text-[9px] text-neutral-600 mt-1">Untested</span>
+                      <span className="text-[9px] text-slate-400 mt-1">Untested</span>
                     )}
                   </button>
                 );
@@ -240,10 +240,10 @@ export const AccuracyLab: React.FC<AccuracyLabProps> = ({
             </div>
 
             {/* Interactive Measurement Controls */}
-            <div className="bg-neutral-950 p-3 rounded-xl border border-neutral-800 space-y-3">
+            <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-200 space-y-3">
               <div className="flex items-center justify-between text-xs">
-                <span className="text-neutral-300 font-mono-tech">Selected: {activeTestPosition}</span>
-                <span className={`font-mono-tech font-bold text-sm ${testRate >= 0 ? 'text-emerald-400' : 'text-amber-400'}`}>
+                <span className="text-slate-700 font-mono-tech font-semibold">Selected: {activeTestPosition}</span>
+                <span className={`font-mono-tech font-bold text-sm ${testRate >= 0 ? 'text-emerald-600' : 'text-amber-600'}`}>
                   {testRate > 0 ? `+${testRate.toFixed(1)}` : testRate.toFixed(1)} sec/day
                 </span>
               </div>
@@ -256,44 +256,44 @@ export const AccuracyLab: React.FC<AccuracyLabProps> = ({
                 step="0.2"
                 value={testRate}
                 onChange={(e) => setTestRate(parseFloat(e.target.value))}
-                className="w-full accent-amber-500"
+                className="w-full accent-indigo-600 cursor-pointer"
               />
 
-              <div className="flex justify-between text-[10px] font-mono-tech text-neutral-500">
+              <div className="flex justify-between text-[10px] font-mono-tech text-slate-400">
                 <span>-6.0 s/d</span>
-                <span className="text-emerald-400">0.0 (Perfect)</span>
+                <span className="text-emerald-600 font-bold">0.0 (Perfect)</span>
                 <span>+8.0 s/d</span>
               </div>
 
               {/* Amplitude and Beat error inputs */}
               <div className="grid grid-cols-2 gap-2 text-xs font-mono-tech pt-1">
-                <div className="bg-neutral-900 p-2 rounded-lg border border-neutral-800 flex justify-between items-center">
-                  <span className="text-[10px] text-neutral-400">Amplitude:</span>
+                <div className="bg-white p-2 rounded-xl border border-slate-200 flex justify-between items-center">
+                  <span className="text-[10px] text-slate-500 font-semibold">Amplitude:</span>
                   <input
                     type="number"
                     value={testAmplitude}
                     onChange={(e) => setTestAmplitude(parseInt(e.target.value) || 280)}
-                    className="w-14 bg-neutral-950 text-right px-1 py-0.5 rounded border border-neutral-800 text-neutral-200"
+                    className="w-14 bg-slate-50 text-right px-1.5 py-0.5 rounded border border-slate-200 text-slate-900 font-bold"
                   />
-                  <span className="text-[10px] text-neutral-500">°</span>
+                  <span className="text-[10px] text-slate-400">°</span>
                 </div>
 
-                <div className="bg-neutral-900 p-2 rounded-lg border border-neutral-800 flex justify-between items-center">
-                  <span className="text-[10px] text-neutral-400">Beat Error:</span>
+                <div className="bg-white p-2 rounded-xl border border-slate-200 flex justify-between items-center">
+                  <span className="text-[10px] text-slate-500 font-semibold">Beat Error:</span>
                   <input
                     type="number"
                     step="0.1"
                     value={testBeatError}
                     onChange={(e) => setTestBeatError(parseFloat(e.target.value) || 0.1)}
-                    className="w-14 bg-neutral-950 text-right px-1 py-0.5 rounded border border-neutral-800 text-neutral-200"
+                    className="w-14 bg-slate-50 text-right px-1.5 py-0.5 rounded border border-slate-200 text-slate-900 font-bold"
                   />
-                  <span className="text-[10px] text-neutral-500">ms</span>
+                  <span className="text-[10px] text-slate-400">ms</span>
                 </div>
               </div>
 
               <button
                 onClick={handleRecordTest}
-                className="w-full py-2 bg-gradient-to-r from-amber-500 to-amber-600 text-neutral-950 font-bold rounded-xl text-xs font-mono-tech hover:opacity-90 transition-opacity flex items-center justify-center gap-1.5"
+                className="w-full py-2.5 bg-indigo-600 text-white font-bold rounded-xl text-xs font-mono-tech hover:bg-indigo-500 transition-colors flex items-center justify-center gap-1.5 shadow-2xs"
               >
                 <CheckCircle2 className="w-4 h-4" />
                 <span>Record Rate For {activeTestPosition.split(' ')[0]}</span>
@@ -302,28 +302,28 @@ export const AccuracyLab: React.FC<AccuracyLabProps> = ({
           </div>
 
           {/* Tolerance Standards Comparison Bar */}
-          <div className="bg-neutral-900/80 rounded-2xl border border-neutral-800 p-4 space-y-2 text-xs">
-            <div className="flex items-center gap-1.5 text-xs text-amber-400 font-mono-tech uppercase">
-              <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
+          <div className="bg-white rounded-3xl border border-slate-200/90 p-4 space-y-2 text-xs shadow-sm">
+            <div className="flex items-center gap-1.5 text-xs text-indigo-600 font-mono-tech uppercase font-bold">
+              <ShieldCheck className="w-3.5 h-3.5 text-indigo-600" />
               <span>Horological Regulation Thresholds</span>
             </div>
 
             <div className="space-y-1.5 font-mono-tech text-[11px]">
-              <div className="flex justify-between p-2 rounded-lg bg-neutral-950 border border-neutral-800/80">
-                <span className="text-neutral-300">METAS Master Chronometer</span>
-                <span className="text-emerald-400 font-bold">0 to +5.0 s/d</span>
+              <div className="flex justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-200/80">
+                <span className="text-slate-700">METAS Master Chronometer</span>
+                <span className="text-emerald-600 font-bold">0 to +5.0 s/d</span>
               </div>
-              <div className="flex justify-between p-2 rounded-lg bg-neutral-950 border border-neutral-800/80">
-                <span className="text-neutral-300">Rolex Superlative Chronometer</span>
-                <span className="text-emerald-400 font-bold">-2.0 to +2.0 s/d</span>
+              <div className="flex justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-200/80">
+                <span className="text-slate-700">Rolex Superlative Chronometer</span>
+                <span className="text-emerald-600 font-bold">-2.0 to +2.0 s/d</span>
               </div>
-              <div className="flex justify-between p-2 rounded-lg bg-neutral-950 border border-neutral-800/80">
-                <span className="text-neutral-300">COSC Swiss Official Chronometer</span>
-                <span className="text-amber-300 font-bold">-4.0 to +6.0 s/d</span>
+              <div className="flex justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-200/80">
+                <span className="text-slate-700">COSC Swiss Official Chronometer</span>
+                <span className="text-indigo-600 font-bold">-4.0 to +6.0 s/d</span>
               </div>
-              <div className="flex justify-between p-2 rounded-lg bg-neutral-950 border border-neutral-800/80">
-                <span className="text-neutral-300">Grand Seiko Spring Drive</span>
-                <span className="text-cyan-400 font-bold">±1.0 s/d (±15s/mo)</span>
+              <div className="flex justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-200/80">
+                <span className="text-slate-700">Grand Seiko 9SA5 Hi-Beat</span>
+                <span className="text-sky-600 font-bold">-3.0 to +5.0 s/d</span>
               </div>
             </div>
           </div>

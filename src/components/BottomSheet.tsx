@@ -44,7 +44,7 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             onClick={onClose}
-            className="absolute inset-0 bg-black/75 backdrop-blur-xs"
+            className="absolute inset-0 bg-slate-900/50 backdrop-blur-xs"
           />
 
           {/* Sheet Container */}
@@ -53,28 +53,28 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: '100%', opacity: 0 }}
             transition={{ type: 'spring', damping: 28, stiffness: 300 }}
-            className={`relative w-full max-w-lg bg-neutral-950 border-t sm:border border-neutral-800 rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col ${maxHeightClass} z-10 overflow-hidden`}
+            className={`relative w-full max-w-lg bg-white border-t sm:border border-slate-200/90 rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col ${maxHeightClass} z-10 overflow-hidden text-slate-800`}
           >
             {/* Grab Handle */}
             <div className="pt-2.5 pb-1 flex justify-center cursor-pointer select-none" onClick={onClose}>
-              <div className="w-10 h-1 rounded-full bg-neutral-700/80 hover:bg-neutral-500 transition-colors" />
+              <div className="w-10 h-1 rounded-full bg-slate-300 hover:bg-slate-400 transition-colors" />
             </div>
 
             {/* Header */}
             {(title || icon) && (
-              <div className="px-5 py-3 border-b border-neutral-800/80 flex items-center justify-between shrink-0 bg-neutral-900/60 backdrop-blur">
+              <div className="px-5 py-3.5 border-b border-slate-100 flex items-center justify-between shrink-0 bg-slate-50/80 backdrop-blur">
                 <div className="flex items-center gap-2.5 min-w-0">
                   {icon && (
-                    <div className="w-7 h-7 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400 shrink-0">
+                    <div className="w-7 h-7 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 shrink-0 shadow-2xs">
                       {icon}
                     </div>
                   )}
                   <div className="min-w-0">
-                    <h3 className="font-serif-luxury text-sm font-bold text-neutral-100 truncate tracking-wide">
+                    <h3 className="text-sm font-bold text-slate-900 truncate tracking-tight">
                       {title}
                     </h3>
                     {subtitle && (
-                      <p className="text-[10px] text-neutral-400 font-mono-tech truncate mt-0.5">
+                      <p className="text-[10px] text-slate-500 font-mono-tech truncate mt-0.5">
                         {subtitle}
                       </p>
                     )}
@@ -85,7 +85,7 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
                   {headerAction}
                   <button
                     onClick={onClose}
-                    className="p-1.5 rounded-full bg-neutral-800/80 hover:bg-neutral-800 text-neutral-400 hover:text-neutral-200 transition-colors"
+                    className="p-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 transition-colors"
                   >
                     <X className="w-4 h-4" />
                   </button>

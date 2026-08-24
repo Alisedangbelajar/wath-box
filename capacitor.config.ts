@@ -1,15 +1,16 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.chronovault.horology',
-  appName: 'ChronoVault',
+  appId: 'com.watchbox.horology',
+  appName: 'Watch Box',
   webDir: 'dist',
   server: {
     androidScheme: 'https'
   },
   android: {
-    backgroundColor: '#0a0a0a'
+    backgroundColor: '#f8f9fc'
   }
 };
 
 export default config;
+
